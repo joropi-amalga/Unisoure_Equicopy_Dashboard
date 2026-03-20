@@ -1,0 +1,1034 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#F0F2F5;color:#0F172A;font-size:13px;min-height:100vh}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:#F1F5F9}
+::-webkit-scrollbar-thumb{background:#CBD5E1;border-radius:3px}
+.hdr{background:#DC2626;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:50}
+.logo-area{display:flex;align-items:center;gap:12px}
+.logo-icon{width:32px;height:32px;background:rgba(255,255,255,.2);border-radius:6px;display:flex;align-items:center;justify-content:center}
+.hdr-div{width:1px;height:26px;background:rgba(255,255,255,.25)}
+.date-pill{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:20px;padding:4px 14px;color:#fff;font-size:11px;font-weight:500}
+.tabs-bar{background:#fff;border-bottom:1px solid #E2E8F0;padding:0 20px;display:flex;overflow-x:auto;position:sticky;top:52px;z-index:40}
+.tab{padding:12px 14px;font-size:12px;font-weight:500;color:#64748B;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;display:flex;align-items:center;gap:4px;transition:color .15s}
+.tab:hover{color:#1B4ED8}
+.tab.active{color:#1B4ED8;border-bottom-color:#1B4ED8;font-weight:600}
+.ubar{background:#EFF6FF;border-bottom:1px solid #BFDBFE;padding:6px 20px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.ubtn{background:#1B4ED8;color:#fff;border:none;border-radius:6px;padding:5px 11px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif}
+.fchip{display:inline-flex;align-items:center;gap:3px;background:#DBEAFE;border:1px solid #93C5FD;border-radius:5px;padding:2px 8px;font-size:10px;color:#1E40AF;font-weight:500}
+.fchip.ok{background:#DCFCE7;border-color:#86EFAC;color:#15803D}
+.dtag{margin-left:auto;font-size:10px;color:#F59E0B;font-weight:600;background:#FFFBEB;border:1px solid #FDE68A;padding:2px 8px;border-radius:5px}
+.tc{display:none}.tc.active{display:block}
+.cnt{padding:14px 20px}
+/* Shared components */
+.card{background:#fff;border:1px solid #E2E8F0;border-radius:8px;overflow:hidden;margin-bottom:12px}
+.card-hdr{padding:10px 14px;border-bottom:1px solid #F1F5F9;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px}
+.card-ttl{font-size:10px;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.7px}
+.card-body{padding:12px 14px}
+.kgrid{display:grid;gap:10px;margin-bottom:12px}
+.k6{grid-template-columns:repeat(6,minmax(0,1fr))}
+.k5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.k4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.kc{background:#fff;border:1px solid #E2E8F0;border-radius:8px;padding:12px 14px;border-top:3px solid var(--ac,#E2E8F0)}
+.kl{font-size:9px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px}
+.kv{font-size:22px;font-weight:800;letter-spacing:-1px;line-height:1;color:#0F172A}
+.kv span{font-size:13px;font-weight:700;margin-left:1px}
+.ks{font-size:10px;color:#94A3B8;margin-top:3px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.leg-row{display:flex;gap:12px;flex-wrap:wrap}
+.li{display:flex;align-items:center;gap:4px;font-size:10px;color:#64748B}
+.ld{width:9px;height:9px;border-radius:2px;flex-shrink:0}
+.pill{display:inline-flex;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:600}
+.pill.g{background:#DCFCE7;color:#15803D}
+.pill.a{background:#FEF9C3;color:#A16207}
+.pill.r{background:#FEE2E2;color:#B91C1C}
+.pill.b{background:#DBEAFE;color:#1D4ED8}
+.pill.gr{background:#F1F5F9;color:#64748B}
+.mono{font-family:'SF Mono','Fira Code',monospace}
+
+/* ── OVERVIEW TABLE ── */
+.otbl{width:100%;border-collapse:collapse;font-size:11px}
+.otbl thead tr{background:#F8FAFC}
+.otbl th{padding:7px 10px;text-align:left;font-size:9px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.6px;white-space:nowrap;cursor:pointer;border-bottom:1px solid #E2E8F0}
+.otbl th:hover{color:#1B4ED8}
+.otbl tbody tr{border-bottom:1px solid #F1F5F9;cursor:pointer;transition:background .1s}
+.otbl tbody tr:hover{background:#F0F7FF}
+.otbl td{padding:8px 10px;white-space:nowrap}
+.rnk{width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:700}
+.rnk.g{background:#FEF3C7;color:#D97706}
+.rnk.s{background:#F1F5F9;color:#64748B}
+.rnk.b{background:#FEF0E7;color:#C2410C}
+.rnk.n{background:#F8FAFC;color:#94A3B8}
+
+/* ── AGENT DETAIL TABLE ── */
+.fbar{display:flex;align-items:center;gap:7px;padding:9px 20px;background:#fff;border-bottom:1px solid #E2E8F0;flex-wrap:wrap}
+.fbtn{padding:5px 13px;border-radius:20px;border:1px solid #E2E8F0;background:#fff;font-size:11px;font-weight:500;color:#64748B;cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s}
+.fbtn:hover,.fbtn.active{background:#1B4ED8;color:#fff;border-color:#1B4ED8}
+.srch{display:flex;align-items:center;gap:5px;background:#F8FAFC;border:1px solid #E2E8F0;border-radius:6px;padding:5px 9px;margin-left:auto}
+.srch input{background:transparent;border:none;outline:none;font-size:11px;color:#334155;width:120px;font-family:'Inter',sans-serif}
+.dtbl{width:100%;border-collapse:collapse;font-size:11px}
+.dtbl thead tr{background:#F8FAFC}
+.dtbl th{padding:7px 9px;text-align:left;font-size:9px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.6px;white-space:nowrap;cursor:pointer;border-bottom:1px solid #E2E8F0}
+.dtbl th:hover{color:#1B4ED8}
+.dtbl tbody tr{border-bottom:1px solid #F1F5F9;cursor:pointer;transition:background .1s}
+.dtbl tbody tr:hover{background:#F0F7FF}
+.dtbl td{padding:8px 9px;white-space:nowrap;vertical-align:middle}
+.otb{background:#EFF6FF;border:1px solid #BFDBFE;border-radius:5px;padding:3px 8px;font-size:10px;font-weight:600;color:#1D4ED8;display:inline-flex;align-items:center;gap:3px}
+.ltb{background:#FEE2E2;border:1px solid #FECACA;border-radius:5px;padding:3px 8px;font-size:10px;font-weight:600;color:#DC2626;display:inline-flex;align-items:center;gap:3px}
+.abw{width:70px;height:7px;background:#E2E8F0;border-radius:4px;overflow:hidden;display:inline-block;vertical-align:middle;margin-right:4px}
+.abf{height:100%;border-radius:4px;background:#1B4ED8}
+
+/* ── SLIDE PANEL ── */
+.sov{position:fixed;inset:0;background:rgba(15,23,42,.5);z-index:500;display:flex;justify-content:flex-end}
+.sp{background:#fff;width:560px;max-width:95vw;height:100%;overflow-y:auto;display:flex;flex-direction:column;box-shadow:-6px 0 28px rgba(0,0,0,.12)}
+.sph{background:#1B4ED8;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.sphn{color:#fff;font-size:16px;font-weight:700}
+.sphs{color:rgba(255,255,255,.7);font-size:11px;margin-top:2px}
+.cx{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:6px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#fff;font-size:13px}
+.cx:hover{background:rgba(255,255,255,.25)}
+.pts{display:flex;border-bottom:1px solid #E2E8F0;background:#F8FAFC;flex-shrink:0;overflow-x:auto}
+.pt{padding:9px 13px;font-size:11px;font-weight:500;color:#64748B;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
+.pt:hover{color:#1B4ED8}
+.pt.active{color:#1B4ED8;border-bottom-color:#1B4ED8;background:#fff}
+.pb{padding:16px 18px;flex:1}
+.ptc{display:none}.ptc.active{display:block}
+.sec-ttl{font-size:9px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid #F1F5F9}
+.mkpi{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:14px}
+.mk{border:1px solid #E2E8F0;border-radius:8px;padding:10px 12px;border-top:3px solid var(--ac)}
+.mk .l{font-size:9px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.6px;margin-bottom:4px}
+.mk .v{font-size:18px;font-weight:800;color:var(--ac)}
+.hbar-r{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.hbar-l{font-size:10px;color:#334155;min-width:110px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hbar-t{flex:1;height:12px;background:#F1F5F9;border-radius:2px;overflow:hidden}
+.hbar-f{height:100%;border-radius:2px}
+.hbar-n{font-size:10px;font-weight:600;color:#334155;width:28px;text-align:right}
+.cases-grid{display:flex;flex-wrap:wrap;gap:5px}
+.cp{padding:3px 9px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:5px;font-size:11px;color:#1D4ED8;font-weight:500}
+
+/* ── APP USAGE ── */
+.au-tog{display:flex;background:#fff;border:1px solid #E2E8F0;border-radius:7px;overflow:hidden}
+.au-tb{padding:6px 13px;font-size:11px;font-weight:500;color:#64748B;cursor:pointer;border:none;background:transparent;font-family:'Inter',sans-serif;transition:all .15s}
+.au-tb.active{background:#1B4ED8;color:#fff}
+.srow{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.sn{font-size:11px;font-weight:600;color:#334155;min-width:120px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb{flex:1;height:20px;border-radius:3px;overflow:hidden;display:flex}
+.ss{height:100%;display:flex;align-items:center;justify-content:center}
+.sl{font-size:9px;font-weight:700;color:#fff;padding:0 3px}
+.acard{background:#fff;border:1px solid #E2E8F0;border-radius:8px;overflow:hidden}
+.acard-h{padding:9px 13px;border-bottom:1px solid #F1F5F9;display:flex;align-items:center;justify-content:space-between}
+.acard-n{font-size:12px;font-weight:700;color:#0F172A}
+.acard-b{padding:11px 13px}
+
+/* ── SHRINKAGE ── */
+.shr-kpi{background:#fff;border:1px solid #E2E8F0;border-radius:8px;padding:12px 14px}
+.shr-lbl{font-size:9px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px}
+.shr-val{font-size:22px;font-weight:800;letter-spacing:-1px;line-height:1}
+.shr-sub{font-size:10px;color:#94A3B8;margin-top:3px}
+.leg-bar{background:#fff;border:1px solid #E2E8F0;border-radius:8px;padding:9px 14px;display:flex;align-items:center;gap:16px;margin-bottom:12px;flex-wrap:wrap}
+.break-note{margin-left:auto;background:#F0FDF4;border:1px solid #BBF7D0;border-radius:6px;padding:3px 11px;font-size:10px;color:#15803D}
+.shrow{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.shname{font-size:11px;font-weight:500;color:#334155;min-width:130px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.shbar{flex:1;height:20px;border-radius:3px;overflow:hidden;display:flex}
+.shseg{height:100%;display:flex;align-items:center;justify-content:center}
+.shlbl{font-size:9px;font-weight:700;color:#fff;padding:0 3px}
+.shpct{font-size:11px;font-weight:700;min-width:42px;text-align:right}
+.arow{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.an{font-size:11px;color:#334155;min-width:130px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.abar{flex:1;height:13px;background:#F1F5F9;border-radius:3px;overflow:hidden}
+.abr{height:100%;border-radius:3px;transition:width .4s}
+.apct{font-size:11px;font-weight:700;min-width:38px;text-align:right}
+.tcard{background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:11px 13px}
+.tc-name{font-size:12px;font-weight:700;margin-bottom:7px}
+.ts-row{display:flex;justify-content:space-between;font-size:11px;padding:2px 0;color:#64748B}
+.rrow{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid #F1F5F980}
+.rnum{font-size:11px;font-weight:700;color:#94A3B8;min-width:26px}
+.rnum.t3{color:#D97706}
+.rname{font-size:12px;font-weight:500;color:#334155;flex:1}
+.rtz{font-size:9px;color:#64748B;background:#F1F5F9;border-radius:3px;padding:1px 5px}
+.rpct{font-size:12px;font-weight:700;min-width:44px;text-align:right}
+
+/* ── TIME OF DAY ── */
+.tod-alert{background:#EFF6FF;border:1px solid #BFDBFE;border-radius:6px;padding:6px 11px;font-size:10px;color:#1E40AF;margin-bottom:10px}
+.crm-r{display:flex;align-items:center;gap:7px;margin-bottom:4px}
+.crm-h{font-size:11px;color:#64748B;min-width:16px;text-align:right;font-weight:500}
+.crm-bw{flex:1;height:15px;background:#F1F5F9;border-radius:3px;overflow:hidden}
+.crm-bf{height:100%;border-radius:3px;background:#22C55E;display:flex;align-items:center;justify-content:flex-end;padding-right:4px}
+.crm-bv{font-size:9px;font-weight:700;color:#fff}
+.hm-tbl{border-collapse:separate;border-spacing:2px;min-width:100%;font-size:10px}
+.hm-th{font-size:10px;font-weight:600;color:#94A3B8;text-align:center;padding:3px 4px;min-width:36px}
+.hm-th.pk{background:#FEF3C7;color:#D97706;border-radius:3px}
+.hm-an{font-size:10px;color:#334155;text-align:right;padding:2px 8px 2px 0;font-weight:500;white-space:nowrap;min-width:120px}
+.hm-c{border-radius:3px;text-align:center;padding:3px 2px;min-width:36px;cursor:default}
+.hm-c:hover{opacity:.8}
+
+@media(max-width:680px){.k6,.k5,.k4{grid-template-columns:repeat(2,1fr)}.g2{grid-template-columns:1fr}.g3{grid-template-columns:1fr}.mkpi{grid-template-columns:repeat(2,1fr)}}
+</style>
+
+<div id="app">
+  <!-- Header -->
+  <div class="hdr">
+    <div class="logo-area">
+      <div class="logo-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 21V9"/></svg></div>
+      <span style="color:#fff;font-size:13px;font-weight:700;letter-spacing:.5px">AMALGA</span>
+      <div class="hdr-div"></div>
+      <span style="color:#fff;font-size:14px;font-weight:700">Unisource / Equicopy Productivity Dashboard</span>
+    </div>
+    <div class="date-pill" id="date-lbl">March 13, 2026</div>
+  </div>
+
+ <!-- Tabs -->
+  <div class="tabs-bar">
+    <div class="tab active" onclick="setTab('ov',this)">📊 Overview</div>
+    <div class="tab" onclick="setTab('ad',this)">👤 Agent Detail</div>
+    <div class="tab" onclick="setTab('au',this)">📱 App Usage</div>
+    <div class="tab" onclick="setTab('sh',this)">✂️ Shrinkage</div>
+    <div class="tab" onclick="setTab('tod',this)">🕐 Time of Day</div>
+    <div class="tab" onclick="setTab('up',this)">⬆ Upload Data</div>
+  </div>
+
+  <!-- Upload bar removed - using Upload Data tab only -->
+ <input type="file" id="fi" webkitdirectory mozdirectory style="display:none" onchange="handleFiles(this.files)">
+
+  <!-- OVERVIEW -->
+  <div class="tc active" id="tc-ov"><div class="cnt">
+    <div class="kgrid k6" id="ov-kpis"></div>
+    <div class="kgrid k4" id="ov-kpis2"></div>
+    <div class="g2">
+      <div class="card"><div class="card-hdr"><div class="card-ttl">Cases by Agent — ACD vs Controlio</div><div class="leg-row"><div class="li"><div class="ld" style="background:#1B4ED8"></div>ACD</div><div class="li"><div class="ld" style="background:#22C55E"></div>Controlio</div></div></div><div class="card-body" id="ov-cases"></div></div>
+      <div class="card"><div class="card-hdr"><div class="card-ttl">Net Active Time by Agent</div><div class="leg-row"><div class="li"><div class="ld" style="background:#1B4ED8"></div>Sistema</div><div class="li"><div class="ld" style="background:#F59E0B"></div>Comms</div><div class="li"><div class="ld" style="background:#94A3B8"></div>Otro</div></div></div><div class="card-body" id="ov-time"></div></div>
+    </div>
+    <div class="card"><div class="card-hdr"><div class="card-ttl">Equipo Completo</div><div class="srch"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input placeholder="Buscar..." id="ov-srch" oninput="renderOvTable()"></div></div><div style="overflow-x:auto"><table class="otbl"><thead><tr id="ov-thead"></tr></thead><tbody id="ov-tbody"></tbody></table></div></div>
+  </div></div>
+
+  <!-- AGENT DETAIL -->
+  <div class="tc" id="tc-ad">
+    <div class="fbar">
+      <button class="fbtn active" onclick="setFilter('all',this)">All Teams</button>
+      <button class="fbtn" onclick="setFilter('Records Retrieval',this)">Records Retrieval</button>
+      <button class="fbtn" onclick="setFilter('OSS',this)">OSS</button>
+      <button class="fbtn" onclick="setFilter('EDR',this)">EDR</button>
+      <button class="fbtn" onclick="setFilter('Vouchers',this)">Vouchers</button>
+      <div class="srch"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input placeholder="Search agent..." id="ad-srch" oninput="renderAdTable()"></div>
+    </div>
+    <div style="overflow-x:auto;background:#fff"><table class="dtbl"><thead><tr id="ad-thead"></tr></thead><tbody id="ad-tbody"></tbody></table></div>
+  </div>
+
+  <!-- APP USAGE -->
+  <div class="tc" id="tc-au"><div class="cnt">
+    <div class="kgrid k4" id="au-kpis"></div>
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap">
+      <div class="au-tog">
+        <button class="au-tb active" onclick="setAuView('team',this)">Vista Equipo</button>
+        <button class="au-tb" onclick="setAuView('cards',this)">Por Agente</button>
+      </div>
+      <div class="leg-row" id="au-cat-btns" style="gap:6px"></div>
+    </div>
+    <div id="au-team">
+      <div class="card"><div class="card-hdr"><div class="card-ttl">Distribución de Tiempo por Agente</div><div class="leg-row"><div class="li"><div class="ld" style="background:#1B4ED8"></div>Sistema</div><div class="li"><div class="ld" style="background:#F59E0B"></div>Comms</div><div class="li"><div class="ld" style="background:#94A3B8"></div>Otras</div><div class="li"><div class="ld" style="background:#EF4444"></div>No Prod</div></div></div><div class="card-body" id="au-stacked"></div></div>
+      <div class="card"><div class="card-hdr"><div class="card-ttl">Top Apps del Equipo</div></div><div class="card-body" id="au-topapps"></div></div>
+    </div>
+    <div id="au-cards" style="display:none"><div class="g3" id="au-cards-grid"></div></div>
+  </div></div>
+
+  <!-- SHRINKAGE -->
+  <div class="tc" id="tc-sh"><div class="cnt">
+    <div class="kgrid k5" id="sh-kpis"></div>
+    <div class="leg-bar">
+      <span style="font-size:10px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.6px;margin-right:4px">LEGEND:</span>
+      <div class="li"><div class="ld" style="background:#EF4444"></div>Late</div>
+      <div class="li"><div class="ld" style="background:#F97316"></div>Early Out</div>
+      <div class="li"><div class="ld" style="background:#7C3AED"></div>Lock</div>
+      <div class="li"><div class="ld" style="background:#F59E0B"></div>Idle</div>
+      <div class="li"><div class="ld" style="background:#059669"></div>Productive</div>
+      <div class="break-note">✓ 90 min break excluded — 1h lunch + 30m</div>
+    </div>
+    <div class="g2">
+      <div class="card"><div class="card-hdr"><div class="card-ttl">Shrinkage Breakdown by Agent</div></div><div class="card-body" id="sh-breakdown"></div></div>
+      <div class="card"><div class="card-hdr"><div class="card-ttl">Schedule Adherence</div></div><div class="card-body" id="sh-adhere"></div></div>
+    </div>
+    <div class="g2">
+      <div class="card"><div class="card-hdr"><div class="card-ttl">Team Summary</div></div><div class="card-body"><div class="g2" id="sh-teams"></div></div></div>
+      <div class="card"><div class="card-hdr"><div class="card-ttl">Shrinkage Ranking</div></div><div class="card-body" id="sh-ranking"></div></div>
+    </div>
+  </div></div>
+
+  <!-- TIME OF DAY -->
+  <div class="tc" id="tc-tod"><div class="cnt">
+    <div class="kgrid k5" id="tod-kpis"></div>
+    <div class="g2" style="margin-bottom:12px">
+      <div class="card"><div class="card-hdr"><div class="card-ttl">Idle + Active + CRM by Hour (PDT)</div><div class="leg-row"><div class="li"><div class="ld" style="background:#1B4ED8"></div>Active</div><div class="li"><div class="ld" style="background:#F59E0B"></div>Idle</div><div class="li"><div class="ld" style="background:#22C55E"></div>CRM</div></div></div><div class="card-body"><div class="tod-alert">⚠ Peak idle hour flagged in red. Gap = disengagement window.</div><div style="position:relative;width:100%;height:220px"><canvas id="tod-chart"></canvas></div></div></div>
+      <div class="card" style="margin-bottom:0"><div class="card-hdr"><div class="card-ttl">CRM Notes by Hour</div></div><div class="card-body" id="tod-crm" style="max-height:280px;overflow-y:auto"></div></div>
+    </div>
+    <div class="card"><div class="card-hdr"><div class="card-ttl">Idle Heatmap — Agent × Hour</div><div style="font-size:10px;color:#94A3B8">Más oscuro = más idle</div></div><div style="overflow-x:auto;padding:12px 14px"><table class="hm-tbl" id="tod-heatmap"></table></div></div>
+  </div></div>
+
+  <!-- UPLOAD -->
+  <div class="tc" id="tc-up"><div class="cnt">
+    <div class="card"><div class="card-body">
+      <div style="font-size:13px;font-weight:700;color:#334155;margin-bottom:14px">Cargar Archivos del Día</div>
+      <div style="border:2px dashed #BFDBFE;border-radius:8px;padding:32px;text-align:center;background:#F0F9FF;cursor:pointer;margin-bottom:16px" onclick="document.getElementById('fi').click()">
+        <div style="font-size:26px;margin-bottom:8px">⬆</div>
+        <div style="font-size:13px;font-weight:600;color:#1B4ED8;margin-bottom:5px">Selecciona la carpeta del día</div>
+        <div style="font-size:11px;color:#64748B">Carpeta formato MM-DD-AAAA · Dentro: un .xlsx por agente + Sessions, Detailed Extended, Keystrokes (.csv) de Controlio</div>
+      </div>
+      <div id="upload-progress" style="display:none;margin-bottom:16px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+          <span style="font-size:11px;font-weight:600;color:#334155">Procesando archivos...</span>
+          <span style="font-size:11px;color:#64748B" id="upload-prog-txt">0/0</span>
+        </div>
+        <div style="height:6px;background:#E2E8F0;border-radius:4px;overflow:hidden">
+          <div id="upload-prog-bar" style="height:100%;width:0%;background:#1B4ED8;border-radius:4px;transition:width 0.2s ease"></div>
+        </div>
+      </div>
+      <!-- Debug / status panel — visible after upload -->
+      <div id="upload-debug" style="display:none;border:1px solid #BBF7D0;border-radius:8px;padding:10px 14px;margin-bottom:16px;font-family:'Inter',sans-serif"></div>
+      <div class="g2"><div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:11px 13px"><div style="font-size:10px;font-weight:700;color:#1B4ED8;margin-bottom:4px">ACD Activity Report</div><div style="font-size:10px;color:#64748B">Nombre: MM-DD-YY.xlsx (ej. 03-11-26.xlsx)</div></div><div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:11px 13px"><div style="font-size:10px;font-weight:700;color:#22C55E;margin-bottom:4px">Sessions CSV</div><div style="font-size:10px;color:#64748B">Nombre: sessions_FECHA_FECHA.csv</div></div><div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:11px 13px"><div style="font-size:10px;font-weight:700;color:#8B5CF6;margin-bottom:4px">Detailed Extended CSV</div><div style="font-size:10px;color:#64748B">Nombre: detailed_extended_FECHA_FECHA.csv</div></div><div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:11px 13px"><div style="font-size:10px;font-weight:700;color:#F59E0B;margin-bottom:4px">Keystrokes CSV</div><div style="font-size:10px;color:#64748B">Nombre: keystrokes_FECHA_FECHA.csv</div></div></div>
+    </div></div>
+  </div></div>
+
+  <!-- SLIDE PANEL -->
+  <div class="sov" id="sov" style="display:none" onclick="closePanel()">
+    <div class="sp" onclick="event.stopPropagation()">
+      <div class="sph">
+        <div><div class="sphn" id="sp-name">—</div><div class="sphs" id="sp-sub">—</div></div>
+        <div class="cx" onclick="closePanel()">✕</div>
+      </div>
+      <div class="pts">
+        <div class="pt active" onclick="setPt('cases',this)">📋 Cases</div>
+        <div class="pt" onclick="setPt('crm',this)">📝 CRM Notes</div>
+        <div class="pt" onclick="setPt('qual',this)">🔥 Quality</div>
+        <div class="pt" onclick="setPt('actv',this)">⚡ Active</div>
+        <div class="pt" onclick="setPt('idle',this)">⏸ Idle</div>
+        <div class="pt" onclick="setPt('shrk',this)">✂️ Shrink</div>
+        <div class="pt" onclick="setPt('time',this)">🕐 Time</div>
+      </div>
+      <div class="pb">
+        <div class="ptc active" id="pt-cases"><div class="sec-ttl" id="sp-cases-ttl">ORDERS (0)</div><div style="font-size:10px;color:#94A3B8;margin-bottom:10px">Órdenes únicas trabajadas</div><div class="cases-grid" id="sp-cases"></div></div>
+        <div class="ptc" id="pt-crm">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px">
+            <div style="border:1px solid #E2E8F0;border-radius:8px;padding:10px 12px;text-align:center;border-top:3px solid #1B4ED8;background:#EFF6FF"><div style="font-size:24px;font-weight:800;color:#1B4ED8" id="sp-ctrl">—</div><div style="font-size:9px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.6px;margin-top:3px">CONTROLIO</div></div>
+            <div style="border:1px solid #E2E8F0;border-radius:8px;padding:10px 12px;text-align:center;border-top:3px solid #22C55E;background:#F0FDF4"><div style="font-size:24px;font-weight:800;color:#22C55E" id="sp-both">—</div><div style="font-size:9px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.6px;margin-top:3px">BOTH</div></div>
+            <div style="border:1px solid #E2E8F0;border-radius:8px;padding:10px 12px;text-align:center;border-top:3px solid #0EA5E9;background:#F0F9FF"><div style="font-size:24px;font-weight:800;color:#0EA5E9" id="sp-crm">—</div><div style="font-size:9px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.6px;margin-top:3px">ACD</div></div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+            <div style="border:1px solid #FECACA;border-radius:8px;padding:10px 12px;text-align:center;background:#FEF2F2"><div style="font-size:22px;font-weight:800;color:#DC2626" id="sp-ctrlonly">—</div><div style="font-size:9px;font-weight:700;color:#DC2626;text-transform:uppercase;letter-spacing:.6px;margin-top:3px">CTRL-ONLY</div></div>
+            <div style="border:1px solid #DDD6FE;border-radius:8px;padding:10px 12px;text-align:center;background:#F5F3FF"><div style="font-size:22px;font-weight:800;color:#7C3AED" id="sp-crmonly">—</div><div style="font-size:9px;font-weight:700;color:#7C3AED;text-transform:uppercase;letter-spacing:.6px;margin-top:3px">CRM-ONLY</div></div>
+          </div>
+          <div style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:6px;padding:6px 11px;font-size:10px;color:#D97706;margin-bottom:10px;display:none" id="sp-crm-extra"></div>
+          <div class="sec-ttl">REQUEST TYPE BREAKDOWN</div>
+          <div id="sp-types"></div>
+          <div class="sec-ttl" id="sp-pernote-ttl">PER-NOTE DETAIL</div>
+          <div style="font-size:9px;color:#94A3B8;margin-bottom:8px">Comparación CTRL vs ACD por orden · Verde = sin diferencia · Rojo = desfase alto</div>
+          <div id="sp-per-note"></div>
+        </div>
+        <div class="ptc" id="pt-qual"><div class="mkpi" id="sp-qkpis"></div><div class="sec-ttl">ACTIVIDADES ACD</div><div id="sp-qbars"></div></div>
+        <div class="ptc" id="pt-actv"><div class="sec-ttl">ACTIVE TIME BY APPLICATION</div><div id="sp-apps"></div></div>
+        <div class="ptc" id="pt-idle"><div style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:8px;padding:12px 14px;margin-bottom:12px"><div style="font-size:9px;font-weight:700;color:#92400E;text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px">TOTAL IDLE</div><div style="font-size:28px;font-weight:800;color:#D97706" id="sp-idle-val">—</div></div><div class="sec-ttl">IDLE BY CATEGORY</div><div id="sp-idle-bars"></div></div>
+        <div class="ptc" id="pt-shrk">
+          <div style="background:#F0FDF4;border:1px solid #BBF7D0;border-radius:8px;padding:12px 14px;margin-bottom:12px"><div style="font-size:9px;font-weight:700;color:#166534;text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px">TOTAL SHRINKAGE</div><div style="font-size:32px;font-weight:800;color:#16A34A" id="sp-shrk-val">—</div><div style="font-size:11px;color:#16A34A;margin-top:3px" id="sp-shrk-sub">—</div></div>
+          <div class="sec-ttl">COMPONENTS</div><div id="sp-shrk-comps"></div>
+          <div style="background:#F0FDF4;border:1px solid #D1FAE5;border-radius:8px;padding:9px 12px;font-size:10px;color:#166534;margin-top:10px">✓ 90 min break allowance deducted from idle before calculating shrinkage.</div>
+          <div class="sec-ttl" style="margin-top:14px">ADHERENCE</div>
+          <div style="height:14px;background:#E2E8F0;border-radius:4px;overflow:hidden;margin-bottom:6px"><div style="height:100%;background:#1B4ED8;border-radius:4px" id="sp-adh-bar"></div></div>
+          <div style="font-size:10px;color:#64748B" id="sp-adh-detail">—</div>
+        </div>
+        <div class="ptc" id="pt-time">
+          <div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;padding:10px 13px;margin-bottom:10px;font-size:11px;color:#1E40AF" id="sp-time-info">—</div>
+          <div class="sec-ttl">HOURLY ACTIVE VS IDLE</div>
+          <div style="position:relative;width:100%;height:170px"><canvas id="sp-hchart"></canvas></div>
+          <div class="sec-ttl" style="margin-top:14px">WORK PATTERN</div>
+          <div style="position:relative;width:100%;height:110px"><canvas id="sp-wchart"></canvas></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+// ── DATA ─────────────────────────────────────────────────────────
+const DEMO=[
+  {id:'ERICK_ARENAS',name:'Erick Arenas',team:'Records Retrieval',country:'MX',tz:'CST',lead:'Shannen A.',onTime:true,schedule:'9:00 AM – 6:00 PM',loginTime:'9:02 AM',logoutTime:'5:36 PM',firstCase:'7:58 AM',deltaSchedule:-2,scheduledMin:480,uniqueOrders:207,orderStatusAudits:450,clientContacts:28,avgTimePerOrder:8,gaps15:3,totalActivities:687,activeMinutes:420,idleMinutes:4,lockMinutes:93,lateMinutes:0,earlyMinutes:0,workMinutes:290,commMinutes:45,nonProdMinutes:5,productivityPct:78,adherePct:100,keystrokeCount:687,ctrlOrders:189,
+   topApps:[{name:'unv.unisourcediscovery.com',min:290,cat:'work'},{name:'Microsoft Teams',min:31,cat:'comm'},{name:'outlook.cloud.microsoft',min:21,cat:'comm'},{name:'docs.google.com',min:20,cat:'other'}],
+   typeBreakdown:{'Order Status Audit':450,'Client Contact':28,'Check Request':12,'Attachment':8,'Faxed':5},
+   ordersList:['340295','261415','337929','340527','324483','301777','339435','328320','331695','339575'],
+   hourly:{7:{a:45,i:0},8:{a:55,i:1},9:{a:52,i:2},10:{a:48,i:3},11:{a:30,i:4},12:{a:20,i:2},13:{a:50,i:1},14:{a:45,i:2},15:{a:42,i:2},16:{a:33,i:1},17:{a:0,i:0}}},
+  {id:'JORGE_ESQUEDA',name:'Jorge Esqueda',team:'Records Retrieval',country:'MX',tz:'CST',lead:'Shannen A.',onTime:true,schedule:'9:00 AM – 6:00 PM',loginTime:'8:58 AM',logoutTime:'5:30 PM',firstCase:'8:02 AM',deltaSchedule:+2,scheduledMin:480,uniqueOrders:185,orderStatusAudits:392,clientContacts:35,avgTimePerOrder:11,gaps15:2,totalActivities:601,activeMinutes:450,idleMinutes:2,lockMinutes:35,lateMinutes:0,earlyMinutes:0,workMinutes:340,commMinutes:20,nonProdMinutes:2,productivityPct:88,adherePct:100,keystrokeCount:540,ctrlOrders:172,
+   topApps:[{name:'unv.unisourcediscovery.com',min:340,cat:'work'},{name:'Microsoft Teams',min:20,cat:'comm'},{name:'outlook.cloud.microsoft',min:15,cat:'comm'},{name:'eams.dwc.ca.gov',min:8,cat:'work'}],
+   typeBreakdown:{'Order Status Audit':392,'Client Contact':35,'Check Request':8,'Faxed':4},
+   ordersList:['325811','310459','318027','307828','313124','339975','341302','340527'],
+   hourly:{7:{a:0,i:0},8:{a:58,i:0},9:{a:55,i:1},10:{a:50,i:2},11:{a:46,i:3},12:{a:22,i:0},13:{a:48,i:2},14:{a:51,i:1},15:{a:44,i:1},16:{a:38,i:0},17:{a:38,i:0}}},
+  {id:'SOFIA_ARANA',name:'Sofia Arana',team:'OSS',country:'CO',tz:'COT',lead:'George G.',onTime:true,schedule:'9:00 AM – 6:00 PM',loginTime:'8:56 AM',logoutTime:'5:30 PM',firstCase:'8:17 AM',deltaSchedule:+4,scheduledMin:480,uniqueOrders:170,orderStatusAudits:358,clientContacts:22,avgTimePerOrder:9,gaps15:2,totalActivities:553,activeMinutes:448,idleMinutes:0,lockMinutes:66,lateMinutes:0,earlyMinutes:0,workMinutes:368,commMinutes:15,nonProdMinutes:0,productivityPct:94,adherePct:99.3,keystrokeCount:612,ctrlOrders:158,
+   topApps:[{name:'unv.unisourcediscovery.com',min:368,cat:'work'},{name:'teams.cloud.microsoft',min:15,cat:'comm'},{name:'outlook.cloud.microsoft',min:7,cat:'comm'}],
+   typeBreakdown:{'Order Status Audit':358,'Client Contact':22,'Attachment':15,'Check Request':5},
+   ordersList:['344047','339390','270998','341627','342658','338566','334526'],
+   hourly:{7:{a:0,i:0},8:{a:56,i:0},9:{a:55,i:0},10:{a:53,i:0},11:{a:50,i:0},12:{a:22,i:0},13:{a:52,i:0},14:{a:50,i:0},15:{a:48,i:0},16:{a:42,i:0},17:{a:30,i:0}}},
+  {id:'NATALY_JIMENEZ',name:'Nataly Jimenez',team:'Records Retrieval',country:'CO',tz:'COT',lead:'Shannen A.',onTime:true,schedule:'9:00 AM – 6:00 PM',loginTime:'8:59 AM',logoutTime:'5:31 PM',firstCase:'8:02 AM',deltaSchedule:-1,scheduledMin:480,uniqueOrders:155,orderStatusAudits:310,clientContacts:18,avgTimePerOrder:12,gaps15:4,totalActivities:490,activeMinutes:380,idleMinutes:28,lockMinutes:80,lateMinutes:0,earlyMinutes:0,workMinutes:293,commMinutes:40,nonProdMinutes:8,productivityPct:79,adherePct:95,keystrokeCount:430,ctrlOrders:140,
+   topApps:[{name:'unv.unisourcediscovery.com',min:293,cat:'work'},{name:'teams.cloud.microsoft',min:40,cat:'comm'},{name:'web.whatsapp.com',min:8,cat:'nonprod'}],
+   typeBreakdown:{'Order Status Audit':310,'Client Contact':18,'Check Request':10,'Faxed':6},
+   ordersList:['337929','340295','261415','341000','338566'],
+   hourly:{7:{a:0,i:0},8:{a:50,i:3},9:{a:44,i:7},10:{a:40,i:4},11:{a:35,i:7},12:{a:18,i:2},13:{a:42,i:3},14:{a:38,i:4},15:{a:32,i:3},16:{a:28,i:2},17:{a:13,i:1}}},
+  {id:'MAX_PAJUELO',name:'Max Pajuelo',team:'EDR',country:'PE',tz:'PET',lead:'Carlos V.',onTime:true,schedule:'9:00 AM – 6:00 PM',loginTime:'9:00 AM',logoutTime:'5:30 PM',firstCase:'6:01 AM',deltaSchedule:0,scheduledMin:480,uniqueOrders:142,orderStatusAudits:290,clientContacts:15,avgTimePerOrder:14,gaps15:3,totalActivities:450,activeMinutes:407,idleMinutes:55,lockMinutes:104,lateMinutes:0,earlyMinutes:0,workMinutes:260,commMinutes:55,nonProdMinutes:10,productivityPct:68,adherePct:100,keystrokeCount:380,ctrlOrders:128,
+   topApps:[{name:'unv.unisourcediscovery.com',min:260,cat:'work'},{name:'teams.cloud.microsoft',min:55,cat:'comm'},{name:'outlook.office.com',min:28,cat:'comm'},{name:'open.spotify.com',min:6,cat:'nonprod'}],
+   typeBreakdown:{'Order Status Audit':290,'Client Contact':15,'Check Request':20,'Faxed':8},
+   ordersList:['341302','340527','338566','336549','334526'],
+   hourly:{7:{a:0,i:0},8:{a:0,i:0},9:{a:48,i:8},10:{a:42,i:10},11:{a:38,i:12},12:{a:20,i:5},13:{a:40,i:9},14:{a:36,i:7},15:{a:34,i:4},16:{a:30,i:0},17:{a:25,i:0}}},
+  {id:'ABRAHAN_LLANOS',name:'Abrahan Llanos',team:'Records Retrieval',country:'CO',tz:'COT',lead:'Shannen A.',onTime:false,schedule:'9:00 AM – 6:00 PM',loginTime:'11:15 AM',logoutTime:'6:31 PM',firstCase:'6:01 AM',deltaSchedule:135,scheduledMin:480,uniqueOrders:98,orderStatusAudits:180,clientContacts:42,avgTimePerOrder:18,gaps15:5,totalActivities:310,activeMinutes:339,idleMinutes:4,lockMinutes:49,lateMinutes:135,earlyMinutes:0,workMinutes:220,commMinutes:30,nonProdMinutes:3,productivityPct:77,adherePct:77,keystrokeCount:580,ctrlOrders:85,
+   topApps:[{name:'unv.unisourcediscovery.com',min:220,cat:'work'},{name:'teams.cloud.microsoft',min:30,cat:'comm'},{name:'outlook.cloud.microsoft',min:14,cat:'comm'}],
+   typeBreakdown:{'Order Status Audit':180,'Client Contact':42,'Check Request':6,'Faxed':12},
+   ordersList:['270998','339390','344047','342658','341627'],
+   hourly:{7:{a:0,i:0},8:{a:0,i:0},9:{a:0,i:0},10:{a:0,i:0},11:{a:35,i:1},12:{a:25,i:0},13:{a:48,i:1},14:{a:50,i:1},15:{a:45,i:0},16:{a:40,i:0},17:{a:38,i:1}}}
+];
+const CAT_COLORS={work:'#1B4ED8',comm:'#F59E0B',other:'#94A3B8',nonprod:'#EF4444'};
+const HOURS=[7,8,9,10,11,12,13,14,15,16,17];
+const CRM_BY_HOUR={7:45,8:120,9:138,10:105,11:118,12:82,13:110,14:95,15:87,16:76,17:12};
+let agents=[...DEMO],curFilter='all',curAuView='team',curPanel=null,panelCharts={},todChart=null;
+let ovSort='uniqueOrders',ovDir='desc',adSort='uniqueOrders',adDir='desc';
+
+// ── HELPERS ───────────────────────────────────────────────────────
+const fmtMin=v=>{if(v==null)return'--';if(v<60)return v+'m';return Math.floor(v/60)+'h '+String(v%60).padStart(2,'0')+'m'};
+const pColor=(v,hi=80,lo=55)=>v==null?'#94A3B8':v>=hi?'#16A34A':v>=lo?'#D97706':'#DC2626';
+const pClass=(v,hi=80,lo=55)=>v==null?'gr':v>=hi?'g':v>=lo?'a':'r';
+
+// ── TAB SWITCHING ────────────────────────────────────────────────
+function setTab(id,el){
+  document.querySelectorAll('.tc').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tc-'+id).classList.add('active');
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  if(el)el.classList.add('active');
+  if(id==='ov'){renderOv();}
+  if(id==='ad'){renderAdTable();}
+  if(id==='au'){renderAu();}
+  if(id==='sh'){renderSh();}
+  if(id==='tod'){renderTod();}
+}
+
+// ── OVERVIEW ─────────────────────────────────────────────────────
+const OV_COLS=[
+  {k:'_r',l:'#'},{k:'name',l:'Agente',s:true},{k:'loginTime',l:'Login'},{k:'logoutTime',l:'Logout'},
+  {k:'uniqueOrders',l:'Órdenes',s:true},{k:'ctrlOrders',l:'Ctrl',s:true},{k:'orderStatusAudits',l:'Audits',s:true},
+  {k:'clientContacts',l:'Contacts',s:true},{k:'avgTimePerOrder',l:'T/Orden',s:true},
+  {k:'productivityPct',l:'Productiv.',s:true},{k:'gaps15',l:'Gaps 15+',s:true},{k:'_v',l:''}
+];
+function renderOv(){
+  const v=agents;
+  const total=v.reduce((s,a)=>s+(a.uniqueOrders||0),0);
+  const contacts=v.reduce((s,a)=>s+(a.clientContacts||0),0);
+  const gaps=v.reduce((s,a)=>s+(a.gaps15||0),0);
+  const pA=v.filter(a=>a.productivityPct!=null);
+  const avgP=pA.length?Math.round(pA.reduce((s,a)=>s+a.productivityPct,0)/pA.length):0;
+  const aA=v.filter(a=>a.activeMinutes!=null);
+  const avgA=aA.length?Math.round(aA.reduce((s,a)=>s+a.activeMinutes,0)/aA.length):0;
+  const tA=v.filter(a=>a.avgTimePerOrder!=null);
+  const avgT=tA.length?Math.round(tA.reduce((s,a)=>s+a.avgTimePerOrder,0)/tA.length):0;
+  const top=v.reduce((b,a)=>(a.uniqueOrders||0)>(b?.uniqueOrders||0)?a:b,null);
+  document.getElementById('ov-kpis').innerHTML=[
+    {l:'On Shift',v:v.length,s:'Agentes activos',ac:'#1B4ED8'},
+    {l:'Cases (ACD)',v:total.toLocaleString(),s:'Order Status Audits',ac:'#22C55E'},
+    {l:'Client Contacts',v:contacts,s:'Contactos del día',ac:'#0EA5E9'},
+    {l:'Avg Net Active',v:`${Math.floor(avgA/60)}h<span>${avgA%60}m</span>`,s:'Excl. lock idle',ac:'#8B5CF6'},
+    {l:'Total Gaps 15+',v:gaps,s:'Inactividades equipo',ac:'#EF4444'},
+    {l:'Avg Productivity',v:avgP+'<span>%</span>',s:'Tiempo en sistema',ac:'#F59E0B'},
+  ].map(k=>`<div class="kc" style="--ac:${k.ac}"><div class="kl">${k.l}</div><div class="kv">${k.v}</div><div class="ks">${k.s}</div></div>`).join('');
+  document.getElementById('ov-kpis2').innerHTML=[
+    {l:'Avg Cases/Agent',v:Math.round(total/(v.length||1)),s:'Promedio por persona',ac:'#1B4ED8'},
+    {l:'Avg Time/Case',v:avgT+'<span> min</span>',s:'Tiempo promedio por orden',ac:'#F59E0B'},
+    {l:'Top Performer',v:`<span style="font-size:15px">${top?.name||'—'}</span>`,s:`${top?.uniqueOrders||0} órdenes · ${top?.productivityPct||0}%`,ac:'#22C55E'},
+    {l:'Avg Productivity',v:avgP+'<span>%</span>',s:'Tiempo en sistema',ac:'#F59E0B'},
+  ].map(k=>`<div class="kc" style="--ac:${k.ac}"><div class="kl">${k.l}</div><div class="kv">${k.v}</div><div class="ks">${k.s}</div></div>`).join('');
+  const sorted=[...v].sort((a,b)=>(b.uniqueOrders||0)-(a.uniqueOrders||0));
+  const max=sorted[0]?.uniqueOrders||1;
+  document.getElementById('ov-cases').innerHTML=sorted.map(a=>{
+    const d=a.ctrlOrders!=null?a.uniqueOrders-a.ctrlOrders:null;
+    const dh=d!=null?` <span style="font-size:9px;font-weight:700;color:${d>=0?'#16A34A':'#DC2626'}">${d>=0?'+':''}${d}</span>`:'';
+    return`<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">
+      <div style="font-size:11px;font-weight:500;color:#334155;min-width:115px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${a.name}${dh}</div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:2px">
+        <div style="height:10px;border-radius:2px;background:#1B4ED8;width:${Math.round((a.uniqueOrders||0)/max*100)}%;display:flex;align-items:center;justify-content:flex-end;padding-right:3px;min-width:8px"><span style="font-size:8px;font-weight:700;color:#fff">${a.uniqueOrders}</span></div>
+        ${a.ctrlOrders!=null?`<div style="height:10px;border-radius:2px;background:#22C55E;width:${Math.round((a.ctrlOrders||0)/max*100)}%;display:flex;align-items:center;justify-content:flex-end;padding-right:3px;min-width:8px"><span style="font-size:8px;font-weight:700;color:#fff">${a.ctrlOrders}</span></div>`:''}
+      </div></div>`;
+  }).join('');
+  const timeSort=[...v].sort((a,b)=>(b.activeMinutes||0)-(a.activeMinutes||0));
+  document.getElementById('ov-time').innerHTML=timeSort.map(a=>{
+    const wm=a.workMinutes||0,cm=a.commMinutes||0,tot=wm+cm||1;
+    const wP=Math.round(wm/tot*100),cP=Math.round(cm/tot*100),oP=Math.max(0,100-wP-cP);
+    const hh=Math.floor((a.activeMinutes||0)/60),mm=(a.activeMinutes||0)%60;
+    return`<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">
+      <div style="font-size:11px;color:#334155;min-width:115px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${a.name}</div>
+      <div style="flex:1;height:18px;border-radius:3px;overflow:hidden;display:flex;position:relative">
+        <div style="height:100%;width:${wP}%;background:#1B4ED8"></div><div style="height:100%;width:${cP}%;background:#F59E0B"></div><div style="height:100%;width:${oP}%;background:#94A3B8"></div>
+        <span style="position:absolute;right:5px;font-size:9px;font-weight:700;color:#fff;text-shadow:0 0 4px rgba(0,0,0,.5);line-height:18px">${a.activeMinutes>0?hh+'h'+String(mm).padStart(2,'0')+'m':'--'}</span>
+      </div></div>`;
+  }).join('');
+  renderOvTable();
+}
+function renderOvTable(){
+  const q=(document.getElementById('ov-srch')?.value||'').toLowerCase();
+  let list=[...agents].filter(a=>a.name.toLowerCase().includes(q)).sort((a,b)=>{
+    const av=a[ovSort]??-1,bv=b[ovSort]??-1;
+    return ovDir==='asc'?(typeof av==='string'?av.localeCompare(bv):av-bv):(typeof bv==='string'?bv.localeCompare(av):bv-av);
+  });
+  const thead=document.getElementById('ov-thead');thead.innerHTML='';
+  OV_COLS.forEach(c=>{const th=document.createElement('th');if(c.s){th.onclick=()=>{if(ovSort===c.k)ovDir=ovDir==='desc'?'asc':'desc';else{ovSort=c.k;ovDir='desc';}renderOvTable();};}th.innerHTML=c.l+(c.s?`<span style="font-size:8px;color:${ovSort===c.k?'#1B4ED8':'#CBD5E1'}">${ovSort===c.k?(ovDir==='desc'?' ↓':' ↑'):' ↕'}</span>`:'');thead.appendChild(th);});
+  document.getElementById('ov-tbody').innerHTML=list.map((a,i)=>{
+    const rc=i===0?'g':i===1?'s':i===2?'b':'n';
+    const d=a.ctrlOrders!=null?a.uniqueOrders-a.ctrlOrders:null;
+    return`<tr onclick="openPanel(agents.find(x=>x.id==='${a.id}'))">
+      <td><div class="rnk ${rc}">${i+1}</div></td>
+      <td style="font-weight:700;max-width:130px;overflow:hidden;text-overflow:ellipsis">${a.name}</td>
+      <td><span class="mono" style="font-size:10px;color:#1B4ED8">${a.loginTime||'--'}</span></td>
+      <td><span class="mono" style="font-size:10px;color:#94A3B8">${a.logoutTime||'--'}</span></td>
+      <td><span style="font-weight:800;font-size:13px">${a.uniqueOrders??'--'}</span>${d!=null?`<span style="font-size:9px;font-weight:700;color:${d>=0?'#16A34A':'#DC2626'};margin-left:2px">${d>=0?'+':''}${d}</span>`:''}
+      </td>
+      <td style="font-weight:700;color:#22C55E">${a.ctrlOrders??'--'}</td>
+      <td class="mono">${a.orderStatusAudits??'--'}</td>
+      <td style="color:#0EA5E9;font-weight:600">${a.clientContacts??'--'}</td>
+      <td class="mono">${a.avgTimePerOrder!=null?a.avgTimePerOrder+'m':'--'}</td>
+      <td><span class="pill ${pClass(a.productivityPct)}">${a.productivityPct!=null?a.productivityPct+'%':'--'}</span></td>
+      <td><span class="pill ${a.gaps15<=2?'g':a.gaps15<=4?'a':'r'}">${a.gaps15??'--'}</span></td>
+      <td><button style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:5px;padding:2px 8px;color:#1B4ED8;cursor:pointer;font-size:10px;font-weight:600;font-family:Inter,sans-serif" onclick="event.stopPropagation();openPanel(agents.find(x=>x.id==='${a.id}'))">Ver ↗</button></td>
+    </tr>`;
+  }).join('');
+}
+
+// ── AGENT DETAIL ──────────────────────────────────────────────────
+const AD_COLS=[
+  {k:'name',l:'AGENT',s:true},{k:'country',l:'COUNTRY'},{k:'team',l:'TEAM'},{k:'lead',l:'LEAD'},
+  {k:'loginTime',l:'LOGIN'},{k:'logoutTime',l:'END'},{k:'onTime',l:'ON-TIME'},
+  {k:'firstCase',l:'1ST CASE'},{k:'deltaSchedule',l:'Δ SCHED'},
+  {k:'activeMinutes',l:'ACTIVE',s:true},{k:'idleMinutes',l:'IDLE',s:true},
+  {k:'ctrlOrders',l:'CTRL',s:true},{k:'uniqueOrders',l:'CRM',s:true},{k:'adherePct',l:'ADHERE',s:true}
+];
+const TEAM_PILL=(t)=>{const c={'OSS':'#F3E8FF #7C3AED','EDR':'#FEF3C7 #D97706','Records Retrieval':'#DBEAFE #1D4ED8','Vouchers':'#D1FAE5 #065F46'};const[bg,tx]=(c[t]||'#F1F5F9 #64748B').split(' ');return`<span style="background:${bg};color:${tx};padding:2px 7px;border-radius:4px;font-size:9px;font-weight:600">${t}</span>`;};
+function setFilter(f,el){curFilter=f;document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));if(el)el.classList.add('active');renderAdTable();}
+function renderAdTable(){
+  const q=(document.getElementById('ad-srch')?.value||'').toLowerCase();
+  let list=[...agents].filter(a=>(curFilter==='all'||a.team===curFilter)&&a.name.toLowerCase().includes(q)).sort((a,b)=>{const av=a[adSort]??-1,bv=b[adSort]??-1;return adDir==='asc'?av-bv:bv-av;});
+  const thead=document.getElementById('ad-thead');thead.innerHTML='';
+  AD_COLS.forEach(c=>{const th=document.createElement('th');if(c.s){th.onclick=()=>{if(adSort===c.k)adDir=adDir==='desc'?'asc':'desc';else{adSort=c.k;adDir='desc';}renderAdTable();};}th.textContent=c.l+(c.s?(adSort===c.k?(adDir==='desc'?' ↓':' ↑'):' ↕'):'');thead.appendChild(th);});
+  document.getElementById('ad-tbody').innerHTML=list.map(a=>{
+    const ds=a.deltaSchedule;const acol=a.adherePct>=95?'#16A34A':a.adherePct>=80?'#D97706':'#DC2626';
+    return`<tr onclick="openPanel(agents.find(x=>x.id==='${a.id}'))">
+      <td style="font-weight:700;max-width:130px;overflow:hidden;text-overflow:ellipsis">${a.name}</td>
+      <td style="font-size:10px;color:#64748B">${a.country||'—'} <span style="font-weight:600;color:#1B4ED8">${a.tz?'('+a.tz+')':''}</span></td>
+      <td>${TEAM_PILL(a.team||'—')}</td>
+      <td style="font-size:10px;color:#64748B">${a.lead||'—'}</td>
+      <td><span class="mono" style="color:#1B4ED8">${a.loginTime||'—'}</span></td>
+      <td><span class="mono" style="color:#94A3B8">${a.logoutTime||'—'}</span></td>
+      <td>${a.onTime?'<span class="otb">✓ On Time</span>':'<span class="ltb">✗ Late</span>'}</td>
+      <td class="mono">${a.firstCase||'—'}</td>
+      <td style="font-weight:700;color:${ds<0?'#DC2626':'#16A34A'}">${ds!=null?(ds>0?'+':'')+ds+'m':'—'}</td>
+      <td><div style="display:flex;align-items:center;gap:4px"><div class="abw"><div class="abf" style="width:${Math.min(100,a.activePercent||Math.round((a.activeMinutes||0)/(a.activeMinutes+a.idleMinutes||1)*100))}%"></div></div><span style="font-size:10px">${fmtMin(a.activeMinutes)}</span></div></td>
+      <td style="color:${(a.idleMinutes||0)>=30?'#DC2626':'#16A34A'};font-weight:700">${fmtMin(a.idleMinutes)}</td>
+      <td style="font-weight:700;color:#22C55E">${a.ctrlOrders??'—'}</td>
+      <td style="font-weight:800;font-size:13px">${a.uniqueOrders??'—'}</td>
+      <td style="font-weight:700;color:${acol}">${a.adherePct!=null?a.adherePct+'%':'—'}</td>
+    </tr>`;
+  }).join('');
+}
+
+// ── APP USAGE ─────────────────────────────────────────────────────
+function renderAu(){
+  const tot=agents.reduce((s,a)=>s+a.activeMinutes,0)||1;
+  const w=agents.reduce((s,a)=>s+a.workMinutes,0);
+  const c=agents.reduce((s,a)=>s+a.commMinutes,0);
+  const o=agents.reduce((s,a)=>s+((a.activeMinutes||0)-a.workMinutes-a.commMinutes-(a.nonProdMinutes||0)),0);
+  const np=agents.reduce((s,a)=>s+(a.nonProdMinutes||0),0);
+  document.getElementById('au-kpis').innerHTML=[
+    {l:'Sistema',v:Math.round(w/tot*100)+'%',s:'del tiempo activo',ac:'#1B4ED8'},
+    {l:'Comunicación',v:Math.round(c/tot*100)+'%',s:'Teams + Outlook',ac:'#F59E0B'},
+    {l:'Otras Apps',v:Math.round(o/tot*100)+'%',s:'herramientas',ac:'#94A3B8'},
+    {l:'No Productivo',v:Math.round(np/tot*100)+'%',s:'promedio equipo',ac:'#EF4444'},
+  ].map(k=>`<div class="kc" style="--ac:${k.ac}"><div class="kl">${k.l}</div><div class="kv" style="font-size:20px;color:${k.ac}">${k.v}</div><div class="ks">${k.s}</div></div>`).join('');
+  if(curAuView==='team')renderAuTeam();else renderAuCards();
+}
+function setAuView(v,el){curAuView=v;document.querySelectorAll('.au-tb').forEach(b=>b.classList.remove('active'));if(el)el.classList.add('active');document.getElementById('au-team').style.display=v==='team'?'block':'none';document.getElementById('au-cards').style.display=v==='cards'?'block':'none';renderAu();}
+function renderAuTeam(){
+  const sorted=[...agents].sort((a,b)=>b.activeMinutes-a.activeMinutes);
+  document.getElementById('au-stacked').innerHTML=sorted.map(a=>{
+    const tot=a.activeMinutes||1;
+    const segs=[{v:a.workMinutes||0,c:'#1B4ED8'},{v:a.commMinutes||0,c:'#F59E0B'},{v:Math.max(0,tot-a.workMinutes-a.commMinutes-(a.nonProdMinutes||0)),c:'#94A3B8'},{v:a.nonProdMinutes||0,c:'#EF4444'}];
+    const pc=a.productivityPct>=80?'#16A34A':a.productivityPct>=60?'#D97706':'#DC2626';
+    return`<div class="srow"><div class="sn">${a.name}</div><div class="sb">${segs.map(s=>{const p=Math.round(s.v/tot*100);return p>0?`<div class="ss" style="width:${p}%;background:${s.c};flex-shrink:0"><span class="sl">${p>=8?p+'%':''}</span></div>`:''}).join('')}</div><div style="min-width:42px;text-align:right;font-size:10px;font-weight:700">${Math.floor(a.activeMinutes/60)}h${a.activeMinutes%60}m</div><span style="font-size:10px;font-weight:700;color:${pc};background:${pc}15;padding:2px 6px;border-radius:4px;min-width:38px;text-align:center">${a.productivityPct}%</span></div>`;
+  }).join('');
+  const appTot={};agents.forEach(a=>(a.topApps||[]).forEach(ap=>{if(!appTot[ap.name])appTot[ap.name]={n:ap.name,m:0,c:ap.cat};appTot[ap.name].m+=ap.min;}));
+  const tops=Object.values(appTot).sort((a,b)=>b.m-a.m).slice(0,10);const mx=tops[0]?.m||1;const tm=tops.reduce((s,a)=>s+a.m,0)||1;
+  document.getElementById('au-topapps').innerHTML=`<div style="display:grid;grid-template-columns:180px 1fr 50px 50px 80px;gap:6px;padding-bottom:7px;border-bottom:1px solid #F1F5F9;margin-bottom:6px">${['App','Tiempo','Min','%','Categoría'].map(h=>`<div style="font-size:9px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.6px">${h}</div>`).join('')}</div>${tops.map((a,i)=>{const col=CAT_COLORS[a.c]||'#94A3B8';const pct=Math.round(a.m/tm*100);return`<div style="display:grid;grid-template-columns:180px 1fr 50px 50px 80px;gap:6px;align-items:center;padding:4px 0;border-bottom:1px solid #F8FAFC"><div style="font-size:11px;font-weight:500;color:#334155;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" title="${a.n}">${i+1}. ${a.n}</div><div style="height:11px;background:#F1F5F9;border-radius:2px;overflow:hidden"><div style="height:100%;width:${Math.round(a.m/mx*100)}%;background:${col};border-radius:2px"></div></div><div style="font-size:11px;font-weight:700;color:#334155">${a.m}m</div><div style="font-size:11px;font-weight:700;color:${col}">${pct}%</div><span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;background:${col}18;color:${col}">${a.c}</span></div>`;}).join('')}`;
+}
+function renderAuCards(){
+  document.getElementById('au-cards-grid').innerHTML=[...agents].sort((a,b)=>b.productivityPct-a.productivityPct).map(a=>{
+    const pc=a.productivityPct>=80?'#16A34A':a.productivityPct>=60?'#D97706':'#DC2626';
+    const tot=a.activeMinutes||1;
+    const cats=[{k:'workMinutes',l:'Sistema',c:'#1B4ED8'},{k:'commMinutes',l:'Comms',c:'#F59E0B'},{k:'nonProdMinutes',l:'No Prod',c:'#EF4444'}];
+    const mx=(a.topApps||[])[0]?.min||1;
+    return`<div class="acard"><div class="acard-h"><div class="acard-n">${a.name}</div><span style="background:${pc}15;color:${pc};padding:2px 8px;border-radius:10px;font-size:9px;font-weight:700">${a.productivityPct}%</span></div><div class="acard-b">
+      ${cats.map(k=>{const v=a[k.k]||0;const p=Math.round(v/tot*100);return`<div style="display:flex;align-items:center;gap:6px;margin-bottom:5px"><div style="width:8px;height:8px;border-radius:2px;background:${k.c};flex-shrink:0"></div><div style="font-size:10px;color:#334155;min-width:55px">${k.l}</div><div style="flex:1;height:8px;background:#F1F5F9;border-radius:2px;overflow:hidden"><div style="height:100%;width:${p}%;background:${k.c}"></div></div><div style="font-size:10px;font-weight:600;color:${k.c};min-width:28px;text-align:right">${p}%</div></div>`;}).join('')}
+      <div style="font-size:9px;font-weight:700;color:#94A3B8;text-transform:uppercase;letter-spacing:.6px;margin:8px 0 5px">Top Apps</div>
+      ${(a.topApps||[]).slice(0,4).map(ap=>`<div style="display:flex;align-items:center;gap:5px;margin-bottom:3px"><div style="font-size:10px;color:#64748B;min-width:110px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${ap.name}</div><div style="flex:1;height:9px;background:#F1F5F9;border-radius:2px;overflow:hidden"><div style="height:100%;width:${Math.round(ap.min/mx*100)}%;background:${CAT_COLORS[ap.cat]||'#94A3B8'}"></div></div><div style="font-size:10px;font-weight:600;color:#334155;min-width:28px;text-align:right">${ap.min}m</div></div>`).join('')}
+      ${(a.nonProdMinutes||0)>0?`<div style="background:#FFF7ED;border:1px solid #FED7AA;border-radius:5px;padding:4px 8px;font-size:10px;color:#C2410C;margin-top:6px">⚠ ${a.nonProdMinutes}m en apps no productivas</div>`:''}
+    </div></div>`;
+  }).join('');
+}
+
+// ── SHRINKAGE ─────────────────────────────────────────────────────
+function computeShr(a){const sched=a.scheduledMin||480;const li=(a.lockMinutes||0)+(a.idleMinutes||0);const adj=Math.max(0,li-90);const lost=(a.lateMinutes||0)+(a.earlyMinutes||0)+adj;return{shrinkPct:Math.max(0,Math.round(lost/sched*1000)/10)};}
+function renderSh(){
+  const data=agents.map(a=>({...a,...computeShr(a)}));
+  const sorted=[...data].sort((a,b)=>b.shrinkPct-a.shrinkPct);
+  const avgShr=(data.reduce((s,a)=>s+a.shrinkPct,0)/data.length).toFixed(1);
+  const avgAdh=(data.reduce((s,a)=>s+(a.adherePct||0),0)/data.length).toFixed(1);
+  const high=data.filter(a=>a.shrinkPct>25).length;
+  const onT=data.filter(a=>a.onTime).length;
+  const ks=data.reduce((s,a)=>s+(a.keystrokeCount||0),0);
+  document.getElementById('sh-kpis').innerHTML=[
+    {l:'Avg Shrinkage',v:avgShr+'%',s:'Excl. 90m break',ac:'#EF4444'},
+    {l:'Avg Adherence',v:avgAdh+'%',s:'vs avail. work time',ac:'#22C55E'},
+    {l:'High Shrinkage',v:high,s:'Agents > 25%',ac:'#F97316'},
+    {l:'On-Time',v:`${onT}<span style="font-size:12px"> / ${data.length}</span>`,s:'Of '+data.length,ac:'#1B4ED8'},
+    {l:'Keystrokes',v:ks.toLocaleString(),s:'All agents',ac:'#8B5CF6'},
+  ].map(k=>`<div class="kc" style="--ac:${k.ac}"><div class="kl">${k.l}</div><div class="kv" style="font-size:20px;color:${k.ac}">${k.v}</div><div class="ks">${k.s}</div></div>`).join('');
+  const maxS=sorted[0]?.shrinkPct||1;const sched=480;
+  document.getElementById('sh-breakdown').innerHTML=sorted.map(a=>{
+    const adj=Math.max(0,(a.lockMinutes||0)+(a.idleMinutes||0)-90);
+    const lkP=Math.round(Math.min(a.lockMinutes||0,adj)/sched*100);
+    const idP=Math.round(Math.min(a.idleMinutes||0,Math.max(0,adj-(a.lockMinutes||0)))/sched*100);
+    const ltP=Math.round((a.lateMinutes||0)/sched*100);
+    const eP=Math.round((a.earlyMinutes||0)/sched*100);
+    const pP=Math.max(0,100-lkP-idP-ltP-eP);
+    const segs=[{p:ltP,c:'#EF4444'},{p:eP,c:'#F97316'},{p:lkP,c:'#7C3AED'},{p:idP,c:'#F59E0B'},{p:pP,c:'#059669'}];
+    const sc=a.shrinkPct>=25?'#EF4444':a.shrinkPct>=10?'#F97316':'#16A34A';
+    return`<div class="shrow"><div class="shname">${a.name}</div><div class="shbar">${segs.filter(s=>s.p>0).map(s=>`<div class="shseg" style="width:${s.p}%;background:${s.c};flex-shrink:0"><span class="shlbl">${s.p>=8?s.p+'%':''}</span></div>`).join('')}</div><div class="shpct" style="color:${sc}">${a.shrinkPct}%</div></div>`;
+  }).join('');
+  const adSorted=[...data].sort((a,b)=>b.adherePct-a.adherePct);
+  document.getElementById('sh-adhere').innerHTML=adSorted.map(a=>{const c=a.adherePct>=95?'#16A34A':a.adherePct>=80?'#D97706':'#EF4444';return`<div class="arow"><div class="an">${a.name}</div><div class="abar"><div class="abr" style="width:${a.adherePct}%;background:${c}"></div></div><div class="apct" style="color:${c}">${a.adherePct}%</div></div>`;}).join('');
+  const teams={};data.forEach(a=>{if(!teams[a.team])teams[a.team]={n:a.team,cnt:0,adh:0,shr:0};teams[a.team].cnt++;teams[a.team].adh+=a.adherePct;teams[a.team].shr+=a.shrinkPct;});
+  const TC={'Records Retrieval':'#1B4ED8','OSS':'#8B5CF6','EDR':'#22C55E','Vouchers':'#F59E0B'};
+  document.getElementById('sh-teams').innerHTML=Object.values(teams).map(t=>{const a=(t.adh/t.cnt).toFixed(1);const s=(t.shr/t.cnt).toFixed(1);const c=TC[t.n]||'#94A3B8';const ac=parseFloat(a)>=95?'#16A34A':parseFloat(a)>=80?'#D97706':'#EF4444';const sc=parseFloat(s)<=5?'#16A34A':parseFloat(s)<=15?'#D97706':'#EF4444';return`<div class="tcard"><div class="tc-name" style="color:${c}">${t.n}</div><div class="ts-row"><span>On shift</span><span style="font-weight:700;color:#334155">${t.cnt}</span></div><div class="ts-row"><span>Avg adherence</span><span style="font-weight:700;color:${ac}">${a}%</span></div><div class="ts-row"><span>Avg shrinkage</span><span style="font-weight:700;color:${sc}">${s}%</span></div></div>`;}).join('');
+  document.getElementById('sh-ranking').innerHTML=sorted.map((a,i)=>{const c=a.shrinkPct>=25?'#EF4444':a.shrinkPct>=10?'#F97316':a.shrinkPct>0?'#16A34A':'#94A3B8';return`<div class="rrow"><div class="rnum ${i<3?'t3':''}">#${i+1}</div><div class="rname">${a.name}</div><span class="rtz">${a.tz||'—'}</span><div class="rpct" style="color:${c}">${a.shrinkPct}%</div></div>`;}).join('');
+}
+
+// ── TIME OF DAY ───────────────────────────────────────────────────
+function renderTod(){
+  const totals={};HOURS.forEach(h=>{totals[h]={a:0,i:0,c:CRM_BY_HOUR[h]||0};});
+  agents.forEach(a=>HOURS.forEach(h=>{totals[h].a+=(a.hourly?.[h]?.a||0);totals[h].i+=(a.hourly?.[h]?.i||0);}));
+  let piH=HOURS[0],maxI=0,paH=HOURS[0],maxA=0,pcH=HOURS[0],maxC=0;
+  HOURS.forEach(h=>{if(totals[h].i>maxI){maxI=totals[h].i;piH=h;}if(totals[h].a>maxA){maxA=totals[h].a;paH=h;}if(totals[h].c>maxC){maxC=totals[h].c;pcH=h;}});
+  const totalIdleMin=agents.reduce((s,a)=>s+HOURS.reduce((ss,h)=>ss+(a.hourly?.[h]?.i||0),0),0);
+  const fmt=h=>String(h).padStart(2,'0')+':00';
+  document.getElementById('tod-kpis').innerHTML=[
+    {l:'Peak Idle Hour',v:fmt(piH),s:'Combined idle peak',ac:'#EF4444'},
+    {l:'Peak Active Hour',v:fmt(paH),s:'Most productive',ac:'#1B4ED8'},
+    {l:'Peak CRM Hour',v:fmt(pcH),s:'Most notes logged',ac:'#22C55E'},
+    {l:'Total Idle',v:(totalIdleMin/60).toFixed(1)+'h',s:'All agents combined',ac:'#F59E0B'},
+    {l:'CRM Coverage',v:agents.length,s:'Agents w/ data',ac:'#8B5CF6'},
+  ].map(k=>`<div class="kc" style="--ac:${k.ac}"><div class="kl">${k.l}</div><div class="kv" style="font-size:20px;color:${k.ac}">${k.v}</div><div class="ks">${k.s}</div></div>`).join('');
+  // Bar chart
+  if(todChart){todChart.destroy();todChart=null;}
+  const bgI=HOURS.map(h=>h===piH?'rgba(239,68,68,.85)':'rgba(245,158,11,.75)');
+  const ctx=document.getElementById('tod-chart');
+  todChart=new Chart(ctx,{type:'bar',data:{labels:HOURS.map(h=>String(h).padStart(2,'0')),datasets:[{label:'Active',data:HOURS.map(h=>totals[h].a),backgroundColor:'rgba(59,130,246,.8)',borderRadius:3},{label:'Idle',data:HOURS.map(h=>totals[h].i),backgroundColor:bgI,borderRadius:3},{label:'CRM',data:HOURS.map(h=>totals[h].c),backgroundColor:'rgba(34,197,94,.8)',borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${c.parsed.y}m`}}},scales:{x:{grid:{display:false},ticks:{font:{size:10},color:'#94A3B8'}},y:{grid:{color:'#F1F5F9'},ticks:{font:{size:10},color:'#94A3B8'}}}}});
+  // CRM sidebar
+  const mC=Math.max(...Object.values(CRM_BY_HOUR));
+  document.getElementById('tod-crm').innerHTML=Object.entries(CRM_BY_HOUR).sort((a,b)=>+a[0]-+b[0]).map(([h,v])=>`<div class="crm-r"><div class="crm-h">${h}</div><div class="crm-bw"><div class="crm-bf" style="width:${Math.round(v/mC*100)}%"><span class="crm-bv">${Math.round(v/mC*100)>=20?v:''}</span></div></div><div style="font-size:10px;font-weight:700;color:#334155;min-width:26px;text-align:right">${v}</div></div>`).join('');
+  // Heatmap
+  let mV=0;agents.forEach(a=>HOURS.forEach(h=>{const v=a.hourly?.[h]?.i||0;if(v>mV)mV=v;}));mV=Math.max(mV,1);
+  const hCell=(v,pk)=>{if(!v)return{bg:'#F8FAFC',tx:'transparent'};const t=v/mV;const bg=t<.2?'#E5E7EB':t<.4?'#9CA3AF':t<.6?'#6B7280':t<.8?'#374151':'#111827';return{bg,tx:'#fff',outline:pk?'2px solid #F59E0B':'none'};};
+  let ht='<thead><tr><th class="hm-an"></th>'+HOURS.map(h=>`<th class="hm-th ${h===piH?'pk':''}">${String(h).padStart(2,'0')}</th>`).join('')+'</tr></thead><tbody>';
+  agents.forEach(a=>{ht+=`<tr><td class="hm-an">${a.name}</td>`;HOURS.forEach(h=>{const v=a.hourly?.[h]?.i||0;const{bg,tx,outline}=hCell(v,h===piH);ht+=`<td class="hm-c" style="background:${bg};color:${tx};${outline?'outline:'+outline+';outline-offset:-1px;':''}" title="${a.name} – ${String(h).padStart(2,'0')}:00 – Idle: ${v}m">${v>0?v+'m':''}</td>`;});ht+='</tr>';});
+  ht+='</tbody>';
+  document.getElementById('tod-heatmap').innerHTML=ht;
+}
+
+// ── SLIDE PANEL ───────────────────────────────────────────────────
+function openPanel(a){
+  if(!a)return;curPanel=a;
+  document.getElementById('sp-name').textContent=a.name;
+  document.getElementById('sp-sub').textContent=`${a.team||''} · ${a.loginTime||'—'} → ${a.logoutTime||'—'} · ${a.totalActivities||0} actividades`;
+  setPt('cases',document.querySelector('.pt'));
+  document.getElementById('sov').style.display='flex';
+}
+function closePanel(){Object.values(panelCharts).forEach(c=>{try{c.destroy()}catch(e){}});panelCharts={};document.getElementById('sov').style.display='none';}
+function setPt(nm,el){
+  document.querySelectorAll('.ptc').forEach(t=>t.classList.remove('active'));document.querySelector('#pt-'+nm).classList.add('active');
+  document.querySelectorAll('.pt').forEach(t=>t.classList.remove('active'));if(el)el.classList.add('active');
+  Object.values(panelCharts).forEach(c=>{try{c.destroy()}catch(e){}});panelCharts={};
+  const a=curPanel;if(!a)return;
+  if(nm==='cases'){document.getElementById('sp-cases-ttl').textContent=`ACD ORDERS (${a.uniqueOrders||0})`;document.getElementById('sp-cases').innerHTML=(a.ordersList||[]).map(o=>`<a class="cp" href="https://unv.unisourcediscovery.com/OrderStatus.aspx?order_id=${o}" target="_blank" title="Abrir orden ${o} en el sistema" style="text-decoration:none;cursor:pointer">${o} ↗</a>`).join('')||'<span style="color:#94A3B8;font-size:11px">Sin datos</span>';}
+if(nm==='crm'){
+    // ── Reconciliation ──────────────────────────────────────────
+    const acdMap=a.acdOrderMap||{};
+    const acdSet=new Set(Object.keys(acdMap));
+    // Build ctrl orders set from stored orderDetails
+    const ctrlMap=a.ctrlOrderDetails||{};
+    const ctrlSet=new Set(Object.keys(ctrlMap));
+    const bothSet=new Set([...acdSet].filter(x=>ctrlSet.has(x)));
+    const ctrlOnly=[...ctrlSet].filter(x=>!acdSet.has(x));
+    const crmOnly=[...acdSet].filter(x=>!ctrlSet.has(x));
+    const ctrlTotal=ctrlSet.size||a.ctrlOrders||0;
+    const crmTotal=acdSet.size||a.uniqueOrders||0;
+    document.getElementById('sp-ctrl').textContent=ctrlTotal||'—';
+    document.getElementById('sp-both').textContent=bothSet.size||'—';
+    document.getElementById('sp-crm').textContent=crmTotal||'—';
+    document.getElementById('sp-ctrlonly').textContent=ctrlOnly.length;
+    document.getElementById('sp-crmonly').textContent=crmOnly.length;
+    // Extra found msg
+    const extraEl=document.getElementById('sp-crm-extra');
+    if(extraEl){const diff=ctrlTotal-crmTotal;extraEl.style.display=diff>0?'block':'none';if(diff>0)extraEl.textContent=`Ctrl found ${diff} more case(s)`;}
+    // Request type breakdown
+    const sdtCount=(a.typeBreakdown?.['Order Status Audit']||0)+(a.typeBreakdown?.['Check Request']||0)+(a.typeBreakdown?.['OrderAttachmentMarker']||0);
+    const imrCount=a.typeBreakdown?.['Client Contact']||0;
+    const maxTB=Math.max(sdtCount,imrCount,1);
+    document.getElementById('sp-types').innerHTML=`
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:7px">
+        <div style="width:10px;height:10px;background:#1B4ED8;border-radius:2px;flex-shrink:0"></div>
+        <div style="font-size:11px;font-weight:600;color:#334155;min-width:35px">SDT</div>
+        <div style="flex:1;height:13px;background:#F1F5F9;border-radius:2px;overflow:hidden"><div style="height:100%;width:${Math.round(sdtCount/maxTB*100)}%;background:#1B4ED8;border-radius:2px"></div></div>
+        <div style="font-size:11px;font-weight:700;color:#1B4ED8;min-width:28px;text-align:right">${sdtCount}</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
+        <div style="width:10px;height:10px;background:#8B5CF6;border-radius:2px;flex-shrink:0"></div>
+        <div style="font-size:11px;font-weight:600;color:#334155;min-width:35px">IMR</div>
+        <div style="flex:1;height:13px;background:#F1F5F9;border-radius:2px;overflow:hidden"><div style="height:100%;width:${Math.round(imrCount/maxTB*100)}%;background:#8B5CF6;border-radius:2px"></div></div>
+        <div style="font-size:11px;font-weight:700;color:#8B5CF6;min-width:28px;text-align:right">${imrCount}</div>
+      </div>`;
+    // Per-note detail — orders in BOTH with time comparison
+    const perNoteEl=document.getElementById('sp-per-note');
+    if(perNoteEl){
+      const perNotes=[...bothSet].map(oid=>{
+        const acd=acdMap[oid];
+        const ctrl=ctrlMap[oid];
+        if(!acd||!ctrl)return null;
+        // Parse times
+        const [aH,aM]=acd.firstTime.split(':').map(Number);
+        const acdMin=aH*60+aM;
+        const ctrlDt=new Date(ctrl.firstTime);
+        const ctrlMin=ctrlDt.getHours()*60+ctrlDt.getMinutes();
+        const diffMin=Math.round((ctrlMin-acdMin)*10)/10;
+        const diffAbs=Math.abs(diffMin);
+        const diffLabel=diffMin>0?`${diffAbs}m after`:`${diffAbs}m before open`;
+        const diffColor=diffAbs>30?'#EF4444':diffAbs>10?'#F59E0B':'#22C55E';
+        const types=[...acd.types].filter(t=>t);
+        const isIMR=acd.hasContact;
+        const typeBadge=isIMR?'IMR':'SDT';
+        const typeBadgeColor=isIMR?'#8B5CF6':'#1B4ED8';
+        const ctrlTimeStr=`${String(ctrlDt.getHours()).padStart(2,'0')}:${String(ctrlDt.getMinutes()).padStart(2,'0')}:${String(ctrlDt.getSeconds()).padStart(2,'0')}`;
+        const acdTimeStr=`${String(aH).padStart(2,'0')}:${String(aM).padStart(2,'0')}:00`;
+        return{oid,typeBadge,typeBadgeColor,ctrlTimeStr,acdTimeStr,diffLabel,diffAbs,diffColor,active:ctrl.active,clicks:ctrl.clicks,ks:ctrl.ks,pages:[...ctrl.pages],hasContact:acd.hasContact};
+      }).filter(Boolean).sort((a,b)=>a.diffAbs-b.diffAbs);
+
+      const noteCount=perNotes.length;
+      document.getElementById('sp-pernote-ttl').textContent=`PER-NOTE DETAIL (${noteCount} NOTES)`;
+      perNoteEl.innerHTML=perNotes.slice(0,15).map(n=>`
+        <div style="border:1px solid #E2E8F0;border-radius:8px;padding:10px 12px;margin-bottom:8px;background:${n.diffAbs>30?'#FFF7ED':n.diffAbs>10?'#FFFBEB':'#F0FDF4'}">
+          <div style="display:flex;align-items:center;gap:7px;margin-bottom:7px">
+            <span style="background:${n.typeBadgeColor}18;color:${n.typeBadgeColor};border:1px solid ${n.typeBadgeColor}40;border-radius:4px;padding:1px 7px;font-size:10px;font-weight:700">${n.typeBadge}</span>
+            <a href="https://unv.unisourcediscovery.com/OrderStatus.aspx?order_id=${n.oid}" target="_blank" style="font-size:11px;font-weight:700;color:#1B4ED8;text-decoration:none">${n.oid} ↗</a>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;font-size:11px">
+            <span style="font-family:monospace;color:#64748B;background:#F1F5F9;padding:1px 6px;border-radius:4px">CTRL ${n.ctrlTimeStr}</span>
+            <span style="color:#94A3B8">→</span>
+            <span style="font-family:monospace;color:#64748B;background:#F1F5F9;padding:1px 6px;border-radius:4px">ACD ${n.acdTimeStr}</span>
+            <span style="background:${n.diffColor}18;color:${n.diffColor};border:1px solid ${n.diffColor}40;border-radius:12px;padding:1px 9px;font-size:10px;font-weight:600;margin-left:4px">◄ ${n.diffLabel}</span>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            ${n.hasContact?'<span style="background:#DCFCE7;color:#15803D;border-radius:4px;padding:1px 7px;font-size:9px;font-weight:700">✓ Client Contact</span>':'<span style="background:#F0FDF4;color:#15803D;border-radius:4px;padding:1px 7px;font-size:9px;font-weight:600">✓ No errors</span>'}
+            ${n.active>0?`<span style="background:#EFF6FF;color:#1D4ED8;border-radius:4px;padding:1px 7px;font-size:9px;font-weight:600">${Math.round(n.active/60*10)/10}m active</span>`:''}
+            ${n.clicks>0?`<span style="background:#F5F3FF;color:#7C3AED;border-radius:4px;padding:1px 7px;font-size:9px;font-weight:600">${n.clicks} clicks</span>`:''}
+            ${n.pages.length>0?`<span style="background:#F8FAFC;color:#64748B;border-radius:4px;padding:1px 7px;font-size:9px">${n.pages.slice(0,2).join(' · ')}</span>`:''}
+          </div>
+        </div>`).join('') || '<div style="color:#94A3B8;font-size:11px">Sin datos cruzados disponibles. Carga el archivo Detailed Extended.</div>';
+      // CTRL-ONLY section
+      if(ctrlOnly.length>0){
+        perNoteEl.innerHTML+=`<div style="margin-top:12px;padding:10px 12px;background:#FEF2F2;border:1px solid #FECACA;border-radius:8px">
+          <div style="font-size:9px;font-weight:700;color:#DC2626;text-transform:uppercase;letter-spacing:.7px;margin-bottom:7px">⚠ CTRL-ONLY — Sin nota en ACD (${ctrlOnly.length})</div>
+          <div style="display:flex;flex-wrap:wrap;gap:5px">${ctrlOnly.map(o=>`<a href="https://unv.unisourcediscovery.com/OrderStatus.aspx?order_id=${o}" target="_blank" style="padding:2px 8px;background:#FEE2E2;border:1px solid #FECACA;border-radius:4px;font-size:10px;color:#DC2626;font-weight:600;text-decoration:none">${o} ↗</a>`).join('')}</div>
+        </div>`;
+      }
+      if(crmOnly.length>0){
+        perNoteEl.innerHTML+=`<div style="margin-top:8px;padding:10px 12px;background:#F5F3FF;border:1px solid #DDD6FE;border-radius:8px">
+          <div style="font-size:9px;font-weight:700;color:#7C3AED;text-transform:uppercase;letter-spacing:.7px;margin-bottom:7px">📝 CRM-ONLY — Sin actividad CTRL (${crmOnly.length})</div>
+          <div style="display:flex;flex-wrap:wrap;gap:5px">${crmOnly.map(o=>`<a href="https://unv.unisourcediscovery.com/OrderStatus.aspx?order_id=${o}" target="_blank" style="padding:2px 8px;background:#EDE9FE;border:1px solid #DDD6FE;border-radius:4px;font-size:10px;color:#7C3AED;font-weight:600;text-decoration:none">${o} ↗</a>`).join('')}</div>
+        </div>`;
+      }
+    }
+  }  
+  
+  if(nm==='qual'){document.getElementById('sp-qkpis').innerHTML=[{l:'Órdenes',v:a.uniqueOrders??'—',ac:'#1B4ED8'},{l:'Contactos',v:a.clientContacts??'—',ac:'#0EA5E9'},{l:'T/Orden',v:a.avgTimePerOrder!=null?a.avgTimePerOrder+'m':'—',ac:'#22C55E'},{l:'Gaps 15+',v:a.gaps15??'—',ac:a.gaps15<=2?'#22C55E':a.gaps15<=4?'#F59E0B':'#EF4444'}].map(k=>`<div class="mk" style="--ac:${k.ac}"><div class="l">${k.l}</div><div class="v">${k.v}</div></div>`).join('');const td=Object.entries(a.typeBreakdown||{}).sort((x,y)=>y[1]-x[1]);const mx=td[0]?.[1]||1;const C=['#1B4ED8','#22C55E','#F59E0B','#EF4444','#8B5CF6'];document.getElementById('sp-qbars').innerHTML=td.map(([n,v],i)=>`<div class="hbar-r"><div class="hbar-l">${n}</div><div class="hbar-t"><div class="hbar-f" style="width:${Math.round(v/mx*100)}%;background:${C[i%C.length]}"></div></div><div class="hbar-n">${v}</div></div>`).join('');}
+  if(nm==='actv'){const apps=a.topApps||[];const mx=apps[0]?.min||1;const C=['#1B4ED8','#22C55E','#F59E0B','#EF4444','#8B5CF6','#0EA5E9'];document.getElementById('sp-apps').innerHTML=apps.map((ap,i)=>`<div class="hbar-r"><div class="hbar-l" title="${ap.name}">${ap.name}</div><div class="hbar-t"><div class="hbar-f" style="width:${Math.round(ap.min/mx*100)}%;background:${C[i%C.length]}"></div></div><div class="hbar-n" style="color:${C[i%C.length]}">${ap.min}m</div></div>`).join('')||'<div style="color:#94A3B8;font-size:11px">Sin datos Controlio</div>';}
+  if(nm==='idle'){document.getElementById('sp-idle-val').textContent=fmtMin(a.idleMinutes);document.getElementById('sp-idle-bars').innerHTML=[{l:'Idle detectado',v:a.idleMinutes||0,c:'#F59E0B'},{l:'Lock screen',v:a.lockMinutes||0,c:'#7C3AED'}].filter(x=>x.v>0).map(x=>{const mx=Math.max(a.idleMinutes||0,a.lockMinutes||0)||1;return`<div class="hbar-r"><div class="hbar-l">${x.l}</div><div class="hbar-t"><div class="hbar-f" style="width:${Math.round(x.v/mx*100)}%;background:${x.c}"></div></div><div class="hbar-n" style="color:${x.c}">${x.v}m</div></div>`;}).join('')||'<div style="color:#64748B;font-size:11px">0m idle — excelente</div>';}
+  if(nm==='shrk'){const{shrinkPct}=computeShr(a);const sc=shrinkPct<=5?'#22C55E':shrinkPct<=15?'#F59E0B':'#EF4444';document.getElementById('sp-shrk-val').textContent=shrinkPct+'%';document.getElementById('sp-shrk-val').style.color=sc;document.getElementById('sp-shrk-sub').textContent=shrinkPct<=5?'✓ Low':shrinkPct<=15?'⚠ Medium':'✗ High';const comps=[{l:'Late Start',c:'#EF4444',v:a.lateMinutes||0},{l:'Early Departure',c:'#F97316',v:a.earlyMinutes||0},{l:'Lock (adj)',c:'#7C3AED',v:a.lockMinutes||0},{l:'Idle (adj)',c:'#F59E0B',v:a.idleMinutes||0}];document.getElementById('sp-shrk-comps').innerHTML=comps.map(c=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid #F1F5F9;font-size:11px"><div style="display:flex;align-items:center;gap:7px"><div style="width:7px;height:7px;border-radius:50%;background:${c.c}"></div>${c.l}</div><span style="color:#64748B">${c.v>0?c.v+'m':'—'}</span><span style="font-weight:700;color:${c.v>0?c.c:'#94A3B8'}">0%</span></div>`).join('');document.getElementById('sp-adh-bar').style.width=(a.adherePct||0)+'%';document.getElementById('sp-adh-detail').textContent=`Scheduled: 9h 00m · Keystrokes: ${a.keystrokeCount||0}`;}
+  if(nm==='time'){const ds=a.deltaSchedule||0;document.getElementById('sp-time-info').innerHTML=`<b>${ds<0?'Early':'Late'}</b> — ${Math.abs(ds)}m ${ds<0?'before':'after'} schedule · First activity: <b>${a.firstCase||'—'}</b> · Login: <b>${a.loginTime||'—'}</b>`;const hrs=HOURS.map(h=>String(h).padStart(2,'0'));const aD=HOURS.map(h=>a.hourly?.[h]?.a||0);const iD=HOURS.map(h=>a.hourly?.[h]?.i||0);const ctx1=document.getElementById('sp-hchart');if(ctx1)panelCharts.h=new Chart(ctx1,{type:'bar',data:{labels:hrs,datasets:[{label:'Active',data:aD,backgroundColor:'#1B4ED8CC',borderRadius:3},{label:'Idle',data:iD,backgroundColor:'#EF4444CC',borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{grid:{color:'#F1F5F9'},ticks:{font:{size:9}}}}}});const ctx2=document.getElementById('sp-wchart');const wD=HOURS.map(h=>a.hourly?.[h]?.a||0);if(ctx2)panelCharts.w=new Chart(ctx2,{type:'bar',data:{labels:hrs,datasets:[{label:'Work',data:wD,backgroundColor:'#22C55ECC',borderRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:9}}},y:{grid:{color:'#F1F5F9'},ticks:{font:{size:9}}}}}});}
+
+}
+
+// ── FILE HANDLING ─────────────────────────────────────────────────
+const WORK_APPS=new Set(['unv.unisourcediscovery.com','eams.dwc.ca.gov','unisourcediscoverycom-my.sharepoint.com']);
+const COMM_APPS=new Set(['Microsoft Teams','teams.cloud.microsoft','outlook.cloud.microsoft','outlook.office.com','MaX UC 1.0.0.0']);
+const NONPROD_APPS=new Set(['open.spotify.com','mx.pinterest.com','youtube.com','web.whatsapp.com','facebook.com','instagram.com']);
+const normName=r=>r.split('_').map(w=>w.charAt(0).toUpperCase()+w.slice(1).toLowerCase()).join(' ');
+const findKey=(n,ks)=>{if(ks.has(n))return n;const lo=n.toLowerCase(),pts=lo.split(' ');for(const k of ks){const kl=k.toLowerCase();if(kl===lo||(pts.length>=2&&kl.includes(pts[0])&&kl.includes(pts[1])))return k;}return null;};
+
+// ── NORMALIZE EXCEL TIME ──────────────────────────────────────────
+// Excel stores times as fractions of a day (0.375 = 9:00 AM)
+// SheetJS reads them as numbers unless {raw:false} — this handles both cases
+const normalizeTime=v=>{
+  if(v==null)return null;
+  if(typeof v==='number'){
+    // Excel serial time: 0 = midnight, 0.5 = noon
+    const totalMins=Math.round(v*24*60);
+    const h=Math.floor(totalMins/60)%24;
+    const m=totalMins%60;
+    return`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+  }
+  if(typeof v==='string'){
+    // Handle "H:MM AM/PM" or "HH:MM" or "HH:MM:SS" formats
+    const match=v.match(/(\d{1,2}):(\d{2})(?::\d{2})?(?:\s*(AM|PM))?/i);
+    if(match){
+      let h=parseInt(match[1]);const m=parseInt(match[2]);
+      if(match[3]){if(match[3].toUpperCase()==='PM'&&h<12)h+=12;if(match[3].toUpperCase()==='AM'&&h===12)h=0;}
+      return`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+    }
+    return v;
+  }
+  return null;
+};
+
+async function handleFiles(files){
+  const rawAcd={},rawSes={},rawDet={};let acdDate='';
+  const fileArr=Array.from(files);
+  const total=fileArr.length;
+
+  console.log('📁 Upload started - Total files:', total);
+  fileArr.forEach(f=>console.log('  - '+f.name+' ('+f.webkitRelativePath+')'));
+
+  if(total===0){alert('❌ No files selected'); return;}
+
+  // ── Extract date from folder name ─────────────────────────────
+  if(fileArr[0]?.webkitRelativePath){
+    const folderName=fileArr[0].webkitRelativePath.split('/')[0];
+    // Format: DD-MM-YYYY or DD-MM-YY
+    const parts=folderName.split(/[\s\-_]+/);
+    if(parts.length>=3){
+      const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+      const day=parseInt(parts[0]),mon=parseInt(parts[1]),yr=parts[2].length===2?'20'+parts[2]:parts[2];
+      if(day&&mon&&yr)document.getElementById('date-lbl').textContent=`${months[mon-1]} ${day}, ${yr}`;
+    }
+  }
+
+  // ── Progress UI ───────────────────────────────────────────────
+  const progEl=document.getElementById('upload-progress');
+  const progBar=document.getElementById('upload-prog-bar');
+  const progTxt=document.getElementById('upload-prog-txt');
+  if(progEl)progEl.style.display='block';
+  let processed=0;
+  const updateProg=(msg)=>{processed++;const pct=Math.round(processed/total*100);if(progBar)progBar.style.width=pct+'%';if(progTxt)progTxt.textContent=`${msg} (${processed}/${total})`;};
+
+  // ── Classify and process each file ───────────────────────────
+  const xlsxFiles=[],csvFiles=[];
+  fileArr.forEach(f=>{
+    const nm=f.name.toLowerCase();
+    if(nm.endsWith('.xlsx')||nm.endsWith('.xls'))xlsxFiles.push(f);
+    else if(nm.endsWith('.csv'))csvFiles.push(f);
+  });
+
+  // Process each xlsx (one per agent or consolidated)
+  // ── PATTERN-BASED REGEX (no column index dependency) ────────────
+  const RE_TIME=/^\d{1,2}:\d{2}$/;           // "07:29" or "7:29"
+  const RE_ORDER=/^\d{4,7}-\d+$/;             // "338608-9"
+  const RE_AGENT=/^[A-Z][A-Z0-9_]{2,}$/;      // "VERONICA_NUNEZ"
+  const SKIP_VALS=new Set(['User Name','Time','Order #','Item Comment','Invoice Note','Activity Type','','Page 1']);
+  const SKIP_PFX=['Total','Report','ACD Activity','Page'];
+
+  for(const file of xlsxFiles){
+    try{
+      const buf=await file.arrayBuffer();
+      const wb=XLSX.read(buf,{type:'array',raw:true});
+      console.log('📊 Excel file:', file.name, '→ Sheets:', wb.SheetNames);
+      
+      // Find correct sheet: prefer "AllContacts" / "activity" / "contact", else first
+      let ws=null,wsName='';
+      for(const sn of wb.SheetNames){
+        const sl=sn.toLowerCase();
+        if(sl.includes('allcontact')||sl.includes('activity')||sl.includes('contact')){ws=wb.Sheets[sn];wsName=sn;break;}
+      }
+      if(!ws){ws=wb.Sheets[wb.SheetNames[0]];wsName=wb.SheetNames[0];}
+      if(!ws){console.error('❌ No sheet in',file.name);continue;}
+      console.log('  Using sheet:',wsName);
+      
+      // Get all rows as raw arrays
+      const rows=XLSX.utils.sheet_to_json(ws,{header:1,defval:null,raw:true});
+      console.log('  Total rows:',rows.length);
+      
+      // Extract ACD report date
+      if(!acdDate){
+        for(const r of rows){
+          for(const c of r){
+            if(typeof c==='string'&&c.includes('ACD Activity Report For')){
+              acdDate=c.split('For ')[1]?.trim()||'';break;
+            }
+          }
+          if(acdDate)break;
+        }
+        if(!acdDate){
+          const m=file.name.match(/(\d{1,2})-(\d{1,2})-(\d{2,4})/);
+          if(m)acdDate=`${m[1]}/${m[2]}/${m[3]}`;
+        }
+      }
+      
+      // ── PATTERN-BASED PARSER ─────────────────────────────────────
+      // Instead of relying on column indices, we scan each row for:
+      //   • a time-pattern value  → "07:29"
+      //   • an order-pattern value → "338608-9"
+      //   • a lone ALL_CAPS name   → "VERONICA_NUNEZ"  (user block)
+      let cur=null;
+      
+      // Get agent name from filename as fallback (supports space OR underscore separator)
+      const fnM=file.name.match(/^\d{1,2}[-_]\d{1,2}[-_]\d{2,4}[\s_]+(.+)\.(xlsx|xls)$/i);
+      if(fnM){cur=fnM[1].replace(/\s+/g,'_').toUpperCase();}
+      
+      for(const r of rows){
+        // Flatten all non-null cell values to strings
+        const sv=r.filter(v=>v!=null).map(v=>String(v).trim()).filter(v=>v!=='');
+        if(!sv.length)continue;
+        
+        // Skip title/header rows: any cell contains a known header word
+        const isHeader=sv.some(v=>SKIP_VALS.has(v)||SKIP_PFX.some(p=>v.startsWith(p)));
+        if(isHeader)continue;
+        
+        // Find time(s) and order(s) by pattern
+        const times=sv.filter(v=>RE_TIME.test(v));
+        const orders=sv.filter(v=>RE_ORDER.test(v));
+        
+        if(times.length>0&&orders.length>0){
+          // ── DATA ROW ──────────────────────────────────────────
+          if(!cur)continue; // no agent set yet, skip
+          const t=times[0];
+          const o=orders[0];
+          // Activity type: all remaining non-time non-order non-empty strings, last one wins
+          const others=sv.filter(v=>!RE_TIME.test(v)&&!RE_ORDER.test(v)&&v.length>1&&!RE_AGENT.test(v));
+          const atype=others.length?others[others.length-1]:'';
+          // Comment: first of others
+          const comment=others.length?others[0]:'';
+          if(!rawAcd[cur])rawAcd[cur]=[];
+          rawAcd[cur].push({time:t,order:o,comment,type:atype});
+          
+        } else if(sv.length===1&&RE_AGENT.test(sv[0])){
+          // ── USER BLOCK ROW ────────────────────────────────────
+          cur=sv[0];
+          if(!rawAcd[cur])rawAcd[cur]=[];
+          console.log('  Agent block:',cur);
+        }
+      }
+      
+      const acts=Object.values(rawAcd).reduce((s,a)=>s+a.length,0);
+      console.log('✓ Parsed:',file.name,'→ Agents:',Object.keys(rawAcd).length,'Activities:',acts);
+      
+    }catch(e){
+      console.error('❌ Error parsing',file.name,':',e.message,e.stack);
+    }
+    updateProg(file.name.replace('.xlsx','').replace('.xls',''));
+  }
+
+  // Process CSVs
+  for(const file of csvFiles){
+    try{
+      const nm=file.name.toLowerCase();
+      const text=await file.text();
+      if(nm.includes('sessions')){
+        const{data}=Papa.parse(text,{header:true,skipEmptyLines:true});
+        console.log('✓ Sessions CSV:', file.name, '→ rows:', data.length);
+        data.forEach(r=>{const n=(r.user_friendly_name||'').trim();if(!n)return;if(!rawSes[n])rawSes[n]={act:0,idle:0,login:null,logout:null};rawSes[n].act+=parseInt(r.active_time||0);rawSes[n].idle+=parseInt(r.idle_time||0);const s=new Date(r.start_time),e=new Date(r.end_time);if(!rawSes[n].login||s<rawSes[n].login)rawSes[n].login=s;if(!rawSes[n].logout||e>rawSes[n].logout)rawSes[n].logout=e;});
+        document.getElementById('c-ses')?.classList.add('ok');
+      }else if(nm.includes('detailed')){
+        const{data}=Papa.parse(text,{header:true,skipEmptyLines:true});
+        console.log('✓ Detailed CSV:', file.name, '→ rows:', data.length);
+        data.forEach(r=>{const n=(r.user_friendly_name||'').trim();if(!n)return;if(!rawDet[n])rawDet[n]={w:0,c:0,np:0,o:0,cl:0,pages:{},orders:new Set()};const act=r.activity_name||'',sec=parseInt(r.active_time||0);let cl=0;try{cl=JSON.parse(r.data||'{}').click||0;}catch(e){}rawDet[n].cl+=cl;if(WORK_APPS.has(act)){rawDet[n].w+=sec;const url=r.url||'',pg=url.split('?')[0].split('/').pop();if(pg?.includes('.aspx'))rawDet[n].pages[pg]=(rawDet[n].pages[pg]||0)+sec;const om=url.match(/order_id=(\d+)/);if(om)rawDet[n].orders.add(om[1]);}else if(COMM_APPS.has(act))rawDet[n].c+=sec;else if(NONPROD_APPS.has(act))rawDet[n].np+=sec;else rawDet[n].o+=sec;const om2=r.url?.match(/order_id=(\d+)/);if(om2){const oid=om2[1];if(!rawDet[n].orderDetails)rawDet[n].orderDetails={};if(!rawDet[n].orderDetails[oid])rawDet[n].orderDetails[oid]={firstTime:r.start_time,lastTime:r.start_time,active:0,clicks:0,ks:0,pages:new Set()};const od=rawDet[n].orderDetails[oid];if(r.start_time<od.firstTime)od.firstTime=r.start_time;if(r.start_time>od.lastTime)od.lastTime=r.start_time;od.active+=sec;try{const d=JSON.parse(r.data||'{}');od.clicks+=d.click||0;od.ks+=d.ks||0;}catch(e){}const pg=r.url.split('?')[0].split('/').pop()?.replace('.aspx','');if(pg)od.pages.add(pg);}});
+        document.getElementById('c-det')?.classList.add('ok');
+      }else if(nm.includes('keystroke')){
+        console.log('✓ Keystrokes CSV:', file.name);
+        document.getElementById('c-ks')?.classList.add('ok');
+      }
+      updateProg(file.name);
+    }catch(e){
+      console.error('❌ Error parsing CSV', file.name, ':', e.message);
+      updateProg(file.name);
+    }
+  }
+
+  // ── Build agents from rawAcd ──────────────────────────────────
+  if(Object.keys(rawAcd).length>0){
+    const sk=new Set(Object.keys(rawSes)),dk=new Set(Object.keys(rawDet));
+    const fmtDt=dt=>{if(!dt)return'--';const h=dt.getHours(),m=dt.getMinutes(),p=h>=12?'PM':'AM',h12=h===0?12:h>12?h-12:h;return`${h12}:${m.toString().padStart(2,'0')} ${p}`};
+    agents=Object.entries(rawAcd).map(([raw,acts])=>{
+      const name=normName(raw);
+      const s=[...acts].sort((a,b)=>{const ta=a.time.split(':').map(Number),tb=b.time.split(':').map(Number);return(ta[0]*60+ta[1])-(tb[0]*60+tb[1]);});
+      const uniqueOrders=new Set(s.map(a=>a.order)).size;
+      const orderStatusAudits=s.filter(a=>a.type==='Order Status Audit').length;
+      const clientContacts=s.filter(a=>a.type==='Client Contact').length;
+      const ob={};s.forEach(a=>{const m=parseInt(a.time)*60+parseInt(a.time.split(':')[1]);if(!ob[a.order])ob[a.order]={f:m,l:m};else ob[a.order].l=m;});
+      const durs=Object.values(ob).map(o=>o.l-o.f).filter(d=>d>0);
+      const avgTimePerOrder=durs.length?Math.round(durs.reduce((a,b)=>a+b,0)/durs.length):0;
+      let gaps15=0;for(let i=1;i<s.length;i++){const t1=s[i-1].time.split(':').map(Number),t2=s[i].time.split(':').map(Number);if((t2[0]*60+t2[1])-(t1[0]*60+t1[1])>=15)gaps15++;}
+      const td={};s.forEach(a=>td[a.type]=(td[a.type]||0)+1);
+      const entry=s[0]?.time?`${parseInt(s[0].time)<12?parseInt(s[0].time):parseInt(s[0].time)-12}:${s[0].time.split(':')[1]} ${parseInt(s[0].time)<12?'AM':'PM'}`:'--';
+      const sk2=findKey(name,sk),dk2=findKey(name,dk);
+      const ses=sk2?rawSes[sk2]:null,det=dk2?rawDet[dk2]:null;
+      if(det&&det.orderDetails)Object.keys(det.orderDetails).forEach(k=>{if(det.orderDetails[k].pages)det.orderDetails[k].pages=[...det.orderDetails[k].pages];});
+      const topPages=det?Object.entries(det.pages).sort((a,b)=>b[1]-a[1]).slice(0,5).map(([p,s])=>({name:p.replace('.aspx',''),min:Math.round(s/60)})):[];
+      const topApps=det?[{name:'unv.unisourcediscovery.com',min:Math.round(det.w/60),cat:'work'},{name:'Communications',min:Math.round(det.c/60),cat:'comm'}]:[];
+      const totalActiveSec=(ses?.act||0),totalIdleSec=(ses?.idle||0);
+      return{id:raw,name,team:'Records Retrieval',country:'',tz:'',lead:'',onTime:true,schedule:'9:00 AM – 6:00 PM',loginTime:ses?fmtDt(ses.login):entry,logoutTime:ses?fmtDt(ses.logout):'--',firstCase:entry,deltaSchedule:0,scheduledMin:480,uniqueOrders,orderStatusAudits,clientContacts,avgTimePerOrder,gaps15,totalActivities:acts.length,activeMinutes:Math.round(totalActiveSec/60),idleMinutes:Math.round(totalIdleSec/60),lockMinutes:0,lateMinutes:0,earlyMinutes:0,workMinutes:det?Math.round(det.w/60):0,commMinutes:det?Math.round(det.c/60):0,nonProdMinutes:det?Math.round(det.np/60):0,productivityPct:det&&totalActiveSec>0?Math.round(det.w/totalActiveSec*100):0,adherePct:100,keystrokeCount:0,ctrlOrders:det?det.orders.size:null,ctrlOrderDetails:det?.orderDetails||{},topApps,topPages,typeBreakdown:td,ordersList:[...new Set(s.map(a=>a.order.split('-')[0]))].slice(0,20),hourly:{},
+      acdOrderMap:(()=>{const m={};s.forEach(a=>{const base=a.order.split('-')[0];if(!m[base])m[base]={firstTime:a.time,types:new Set(),hasContact:false};m[base].types.add(a.type);if(a.type==='Client Contact')m[base].hasContact=true;});return m;})()};
+    }).filter(a=>a.totalActivities>0);
+
+    // Update acd chip with count
+    const acdChip=document.getElementById('c-acd');
+    if(acdChip){acdChip.classList.add('ok');acdChip.textContent=`ACD · ${xlsxFiles.length} agentes`;}
+    if(acdDate){const[mo,d,y]=acdDate.split('/');const months=['January','February','March','April','May','June','July','August','September','October','November','December'];document.getElementById('date-lbl').textContent=`${months[parseInt(mo)-1]} ${parseInt(d)}, 20${y}`;}
+    document.getElementById('demo-tag')?.style&&(document.getElementById('demo-tag').style.display='none');
+    console.log('✅ FINAL: Loaded',agents.length,'agents with data');
+  }else{
+    console.warn('⚠️ No ACD data found! Check file format and column names.');
+    console.warn('Expected columns: User Name, Time, Order #, Item Comment, Activity Type');
+  }
+
+  // ── Hide progress, re-render ──────────────────────────────────
+  const loadedAgents=agents.length;
+  const loadedSes=Object.keys(rawSes).length;
+  const loadedDet=Object.keys(rawDet).length;
+  console.log('📊 Data stats - Sessions:', loadedSes, 'Detailed:', loadedDet, 'Agents loaded:', loadedAgents);
+
+  // Show debug panel in Upload tab
+  const dbg=document.getElementById('upload-debug');
+  if(dbg){
+    dbg.style.display='block';
+    if(loadedAgents===0){
+      dbg.style.background='#FEF2F2';dbg.style.borderColor='#FECACA';
+      dbg.innerHTML=`<div style="font-size:11px;font-weight:700;color:#DC2626">❌ No se cargaron agentes. Revisa el formato del .xlsx (debe tener hoja con "activity" o "contact" en el nombre, y columnas: User Name, Time, Order #, Activity Type)</div>`;
+    } else {
+      dbg.style.background='#F0FDF4';dbg.style.borderColor='#BBF7D0';
+      dbg.innerHTML=`<div style="font-size:11px;font-weight:700;color:#15803D">✅ Carga completada</div>
+        <div style="font-size:10px;color:#374151;margin-top:5px;display:flex;gap:14px;flex-wrap:wrap">
+          <span>👥 Agentes ACD: <b>${loadedAgents}</b></span>
+          <span>🖥 Sessions CSV: <b>${loadedSes}</b> usuarios</span>
+          <span>📊 Detailed CSV: <b>${loadedDet}</b> usuarios</span>
+          <span>📋 Actividades totales: <b>${agents.reduce((s,a)=>s+(a.totalActivities||0),0).toLocaleString()}</b></span>
+        </div>
+        ${loadedAgents>0?`<div style="font-size:10px;color:#6B7280;margin-top:5px">Agentes: ${agents.map(a=>a.name).join(' · ')}</div>`:''}`;
+    }
+  }
+
+  setTimeout(()=>{if(progEl)progEl.style.display='none';},1200);
+  // Explicit re-render instead of relying on tab click
+  renderOv();
+  renderAdTable();
+}
+
+// ── INIT ──────────────────────────────────────────────────────────
+renderOv();
+</script>
